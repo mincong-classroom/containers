@@ -1,0 +1,11 @@
+name: app
+
+on:
+  push
+
+jobs:
+  demo-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: echo 'Welcome to the course!'
