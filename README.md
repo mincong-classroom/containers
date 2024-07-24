@@ -1,6 +1,6 @@
-# containers-template
+# Assignments
 
-This is a template repository for the assignments of the course "Software Containerization and Orchestration" for the students of [ESIGELEC](https://esigelec.fr).
+Welcome! This is a mono-repository for the assignments of the course "Software Containerization and Orchestration" for the students of [ESIGELEC](https://esigelec.fr). It includes 3 sections, 5 lab sessions, and is composed of different key objectives as described below:
 
 ```mermaid
 %%{
@@ -39,3 +39,5 @@ timeline
             : Create a ConfigMap
             : Create a PersistentVolume
 ```
+
+For students attempting this course, the description of each lab session is not immediately available. It will be distributed to you under the `docs/` directory as a pull request, right before the beginning of a lab session. The answers to that lab session will be distributed at the beginning of the next chapter.
