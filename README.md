@@ -12,7 +12,7 @@ This is a template repository for the assignments of the course "Software Contai
 timeline
     title Lab Sessions Timeline
     section Containers
-        §1 Dockerfile
+        §1 Containerization with Docker
             : Package Java application as a JAR
             : Create Docker image
             : Run Docker image
