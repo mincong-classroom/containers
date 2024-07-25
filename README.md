@@ -77,6 +77,9 @@ kubectl version
 #Server Version: v1.29.2
 ```
 
+> [!TIP]
+> Use button "Reset Kubernetes Cluster" of Docker Desktop to clear all existing objects of the cluster. This can be useful if you want to start from scratch, specially when you use a desktop from the school or when you messed up the cluster with incorrect operations. It only takes a few seconds to complete.
+
 ### Others
 
 You are also expected to have these command line tools: `mvn`, `javac`, `git`, `curl`
