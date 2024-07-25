@@ -1,6 +1,6 @@
 # Assignments
 
-Welcome to the lab sessions! This is a mono-repository for the assignments of the course "Software Containerization and Orchestration" for the students of [ESIGELEC](https://esigelec.fr). It includes 3 sections, 5 lab sessions, and is composed of different key objectives as described below:
+Welcome to the lab sessions! This is a mono-repository for the assignments of the course "Software Containerization and Orchestration" for the students of [ESIGELEC](https://esigelec.fr), majoring in "Ingenierie des Services du Numerique" (ISN). It includes 3 sections, 5 lab sessions, and is composed of different key objectives as described below:
 
 ```mermaid
 %%{
