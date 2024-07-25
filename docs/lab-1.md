@@ -1,4 +1,8 @@
-# Introduction
+# Dockerfiles
+
+Lab Session 1 - 28 Oct, 2024
+
+## Introduction
 
 The goal of this lab session is to let you practice the creation of
 Docker images using Dockerfiles, and the inspectation of Docker
@@ -10,54 +14,6 @@ To submit the answers to this lab session, you need to copy this
 markdown document to the `reports/` directory of this Git repository and
 fill in your answers. This should be done before the beginning of the
 next course.
-
-# Prerequisite
-
-This lab session requires the use of Docker Desktop. If you are using
-the computer of ESIGELEC, the Docker Desktop is preinstalled. If you are
-using your personal computer, please download Docker Desktop from the
-official website of Docker, Inc.
-
-<https://www.docker.com/products/docker-desktop/>
-
-Run the command `docker -v` to ensure that the `docker` command line is
-available in your terminal. Please paste the result below.
-
-  
-
-    *\[answer\]*
-
-  
-
-  
-
-Tell M. Huang your GitHub accounts so that you can have access to the
-target Git repository.
-
-Clone the Git repository by replacing the `$TEAM` by your actual team in
-lowercase.
-
-``` sh
-git clone git@github.com:mincong-h/containers-${TEAM}.git
-```
-
-For example, if you are in the `red` team:
-
-``` sh
-git clone git@github.com:mincong-h/containers-red.git
-```
-
-  
-
-Perform the following actions to ensure that the project can be
-installed on your machine.
-
-``` sh
-cd containers-red/weekend-server
-mvn install
-```
-
-# Exercises
 
 ## Exercise 1: Create a Java image
 

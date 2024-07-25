@@ -1,4 +1,8 @@
-# Introduction
+# GitHub Actions
+
+Lab Session 2 - 23 Oct, 2024
+
+## Introduction
 
 The goal of this lab session is to let you practice the development of a
 continuous integration (CI) pipeline using GitHub Actions, including the
@@ -11,16 +15,12 @@ markdown document to the `reports/` directory of this Git repository and
 fill in your answers. This should be done before the beginning of the
 next course.
 
-# Prerequisite
+> \[!IMPORTANT\] This lab session assumes that you completed lab session
+> 1, meaning that your Java application is containerized and published
+> successfully to Docker Hub. If it’s not the case, please notify the
+> teacher.
 
-This lab session requires the use Docker Desktop and GitHub
-(<https://github.com/>). It also assumes that you completed lab session
-1, i.e. the Dockerfile for your Java application that is completely
-working. If it’s not the case, please notify the teacher.
-
-# Exercises
-
-## Exercise 1: Run unit tests
+## Exercise 1 - Run unit tests
 
 Replace the existing job “hello-world” with the job
 “weekend-server-test” which runs the unit tests of the Maven project
@@ -39,7 +39,7 @@ execution of the job.
 
   
 
-## Exercise 2: Release a Docker image
+## Exercise 2 - Release a Docker image
 
 Create a second job “weekend-server-release” which builds and publishes
 a Docker image of the Java application to Docker Hub. The final target

@@ -1,4 +1,8 @@
-# Introduction
+# Pod in Kubernetes
+
+Lab Session 3 - 28 Oct, 2024
+
+## Introduction
 
 The goal of this lab session is to let you practice the basics of pod
 and the command line tool `kubectl` in Kubernetes, which includes
@@ -10,12 +14,8 @@ markdown document to the `reports/` directory of this Git repository and
 fill in your answers. This should be done before the beginning of the
 next course.
 
-# Prerequisite
-
-You need to enable the Kubernetes feature in Docker Desktop. See the
-README of the Git repository for more details.
-
-# Exercises
+> \[!NOTE\] You need to enable the Kubernetes feature in Docker Desktop.
+> See the README of the Git repository for more details.
 
 ## Exercise 1 - Kubernetes Overview
 

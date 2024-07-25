@@ -1,4 +1,8 @@
-# Introduction
+# Configuration and Storage in Kubernetes
+
+Lab Session 5 - 20 Nov, 2024
+
+## Introduction
 
 The goal of this lab session is to let you practice the basics of
 configuration and storage in Kubernetes, which includes the creation of
@@ -11,8 +15,6 @@ markdown document to the `reports/` directory of this Git repository and
 fill in your answers. This should be done before the beginning of the
 next course. This should be done before the end of next week (1 Dec,
 2024 at midnight).
-
-# Exercises
 
 ## Exercise 1 - ConfigMap
 

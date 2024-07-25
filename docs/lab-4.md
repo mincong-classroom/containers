@@ -1,3 +1,7 @@
+# Deployment and Networking in Kubernetes
+
+Lab Session 4 - 4 Nov, 2024
+
 # Introduction
 
 The goal of this lab session is to let you practice the basics of
@@ -27,9 +31,7 @@ Cluster” in your Docker Desktop (Settings \> Kubernetes).
 
 <!-- I don't add more details because they should already have the software installed. -->
 
-## Exercises
-
-### Exercise 1 - ReplicaSet
+## Exercise 1 - ReplicaSet
 
 Create a new ReplicaSet with 2 replicas and the Docker image
 `nginx:1.26` and call this resource `nginx`. Use labels `app:nginx`,
@@ -69,7 +71,7 @@ now? Why?
 
   
 
-### Exercise 2 - Deployment
+## Exercise 2 - Deployment
 
 Create a new Deployment with 2 replicas using the Docker image
 `weekend-server` that you built in the previous lab session and call
