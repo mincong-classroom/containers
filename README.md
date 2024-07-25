@@ -57,14 +57,11 @@ docker --version
 ```
 
 > [!WARNING]
-> For any computer from ESIGELEC laboratory, you don't have permissions to install software yourselves. Please contact the teach if you encounter difficulties using it.
+> For any computer from ESIGELEC laboratory, you don't have permissions to install software yourselves. Please contact the teacher if you encounter any difficulties.
 
 ### Kubernetes
 
-> [!NOTE]
-> This is only useful for lab sessions 3, 4, and 5 when practicing Kubernetes-related skills. This feature does not need to be enabled for lab sessions 1 and 2.
-
-Kubernetes has many distributions. For this course, we use the Kubernetes feature embedded in Docker Desktop. To enable this, you need to go to the Docker Desktop's settings and click "Enable Kubernetes".
+Kubernetes has many distributions. For this course, we use the Kubernetes feature embedded in Docker Desktop. To enable this, you need to go to the Docker Desktop's settings and click "Enable Kubernetes". Note that this feature is only useful for lab sessions 3, 4, and 5 when practicing Kubernetes-related skills. It does not need to be enabled for lab sessions 1 and 2.
 
 ![Enable Kubernetes](docs/assets/Screenshot-2024-07-03-docker-desktop.png)
 
