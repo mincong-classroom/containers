@@ -80,6 +80,21 @@ kubectl version
 > [!TIP]
 > Use button "Reset Kubernetes Cluster" of Docker Desktop to clear all existing objects of the cluster. This can be useful if you want to start from scratch, specially when you use a desktop from the school or when you messed up the cluster with incorrect operations. It only takes a few seconds to complete.
 
+> [!TIP]
+> To facilitate your operations, you can enable the shell completion for your OS. Visit the official guide [kubectl completion | Kubernetes](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_completion/) for the detailed instructions. You can also add an alias `k` for `kubectl` so that you don't have to type the entire command.
+>
+> Bash / Zsh:
+>
+> ```sh
+> alias k=kubectl
+> ```
+>
+> PowerShell:
+>
+> ```powershell
+> Set-Alias k kubectl
+> ```
+
 ### Others
 
 You are also expected to have these command line tools: `mvn`, `javac`, `git`, `curl`
