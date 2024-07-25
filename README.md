@@ -83,3 +83,7 @@ kubectl version
 ### Others
 
 You are also expected to have these command line tools: `mvn`, `javac`, `git`, `curl`
+
+## Discussions
+
+If you have any questions or feedback for this course, please use the [discussions](https://github.com/orgs/mincong-classroom/discussions) of GitHub. I would love to hear from you!
