@@ -14,7 +14,8 @@ markdown document to the `reports/` directory of this Git repository and
 fill in your answers. This should be done before the beginning of the
 next course.
 
-> [!NOTE] You need to enable the Kubernetes feature in Docker Desktop.
+> [!NOTE]
+> You need to enable the Kubernetes feature in Docker Desktop.
 > See the README of the Git repository for more details.
 
 ## Exercise 1 - Kubernetes Overview

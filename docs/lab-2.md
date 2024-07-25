@@ -15,7 +15,8 @@ markdown document to the `reports/` directory of this Git repository and
 fill in your answers. This should be done before the beginning of the
 next course.
 
-> [!IMPORTANT] This lab session assumes that you completed lab session
+> [!IMPORTANT]
+> This lab session assumes that you completed lab session
 > 1, meaning that your Java application is containerized and published
 > successfully to Docker Hub. If it’s not the case, please notify the
 > teacher.
