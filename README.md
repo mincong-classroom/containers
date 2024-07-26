@@ -54,7 +54,7 @@ $$
 >
 > Please do not start the lab session in advance because the content of the lab is related to the lecture, so you should follow the lecture before getting started. Also, the content of the lab may be modified.
 
-If you are motivated to go further, you are encouraged to apply the knowledge learned from this course in other courses: Node.js, Frameworks, Integration Project, PL/SQL, AI with Python, PING, etc. You can write down your analysis and your results in the lab reports as an appendix and earn up to 5 points for that session. This can be done before the end of the year (31 Dec 2023).
+If you are motivated to go further, you are encouraged to apply the knowledge learned from this course in other courses: Node.js, Frameworks, Integration Project, PL/SQL, AI with Python, PING, etc. You can write down your analysis and your results in the lab reports as an appendix and earn up to 5 points for that session. This can be done before the end of the year (31 Dec 2024).
 
 ## Installation
 
