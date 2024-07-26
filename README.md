@@ -40,7 +40,21 @@ timeline
             : Create a PersistentVolume
 ```
 
-For students attempting this course, the description of each lab session is not immediately available. It will be distributed to you under the `docs/` directory as a pull request, right before the beginning of a lab session. The answers to that lab session will be distributed at the beginning of the next chapter.
+## Report Submission
+
+For students attempting this course, the description of each lab session is available under the `docs/` directory, such as `lab-1.md`. For each report, you need to fill in the answers in the document in place in the answer areas. Or, you need to provide relevant code snippets in your Git repository following the instructions. The answers to each lab session will be distributed at the beginning of the next chapter, so the deadline for submitting your lab report is the beginning of the next session. The deadline for the last lab session will be the 1 Dec 2024 at midnight. Please complete everything before the deadline. All submissions after the deadline won't be taken into account.
+
+The score of the course is calculated based on the scores of the lab sessions, where each lab session is equally weighted. Each lab session has 20 points and the final score of the module is the average of the 5 lab sessions. For example, if you have 13, 17, 15, 14, and 16 for the 5 lab sessions, then the final score will be 15.
+
+$$
+\text{Score} = \frac{13 + 17 + 15 + 14 + 16}{5} = \frac{75}{5} = 15
+$$
+
+> [!NOTE]
+>
+> Please do not start the lab session in advance because the content of the lab is related to the lecture, so you should follow the lecture before getting started. Also, the content of the lab may be modified.
+
+If you are motivated to go further, you are encouraged to apply the knowledge learned from this course in other courses: Node.js, Frameworks, Integration Project, PL/SQL, AI with Python, PING, etc. You can write down your analysis and your results in the lab reports as an appendix and earn up to 5 points for that session. This can be done before the end of the year (31 Dec 2023).
 
 ## Installation
 

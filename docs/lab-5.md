@@ -10,11 +10,9 @@ a ConfigMap to configure your application, the creation of a persistence
 volume (PV) and a persistence volume claim (PVC) for a stateful
 application, such as MySQL database.
 
-To submit the answers to this lab session, you need to copy this
-markdown document to the `reports/` directory of this Git repository and
-fill in your answers. This should be done before the beginning of the
-next course. This should be done before the end of next week (1 Dec,
-2024 at midnight).
+To submit the answers to this lab session, please fill in your answers
+in this document in-place. This should be done before the end of next
+week (1 Dec, 2024 at midnight).
 
 ## Exercise 1 - ConfigMap
 

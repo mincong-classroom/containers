@@ -10,10 +10,9 @@ definition of workflow, jobs, and the usage of actions and scripts. At
 the end of this session, the Docker image of your Java application
 should be published to Docker Hub (<https://hub.docker.com/>).
 
-To submit the answers to this lab session, you need to copy this
-markdown document to the `reports/` directory of this Git repository and
-fill in your answers. This should be done before the beginning of the
-next course.
+To submit the answers to this lab session, please fill in your answers
+in this document in-place. This should be done before the beginning of
+the next course.
 
 > [!IMPORTANT]
 > This lab session assumes that you completed lab session

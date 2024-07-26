@@ -10,10 +10,9 @@ containers. Note that the Java image produced by this session **will be
 used in the lab sessions** of the following chapters. So please
 prioritize your work and ensure that it is done before the next lecture.
 
-To submit the answers to this lab session, you need to copy this
-markdown document to the `reports/` directory of this Git repository and
-fill in your answers. This should be done before the beginning of the
-next course.
+To submit the answers to this lab session, please fill in your answers
+in this document in-place. This should be done before the beginning of
+the next course.
 
 ## Exercise 1: Create a Java image
 

@@ -10,10 +10,9 @@ a ReplicaSet, the creation of a Deployment, the ability to read and edit
 Kubernetes manifests in YAML, the configuration of commonly used
 networking solutions, and the operations associated to these objectives.
 
-To submit the answers to this lab session, you need to copy this
-markdown document to the `reports/` directory of this Git repository and
-fill in your answers. This should be done before the beginning of the
-next course.
+To submit the answers to this lab session, please fill in your answers
+in this document in-place. This should be done before the beginning of
+the next course.
 
 ## Prerequisite
 

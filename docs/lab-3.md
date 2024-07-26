@@ -9,10 +9,9 @@ and the command line tool `kubectl` in Kubernetes, which includes
 different ways to create a pod, the ability to read and edit Kubernetes
 manifest in YAML, and operate a pod using different commands.
 
-To submit the answers to this lab session, you need to copy this
-markdown document to the `reports/` directory of this Git repository and
-fill in your answers. This should be done before the beginning of the
-next course.
+To submit the answers to this lab session, please fill in your answers
+in this document in-place. This should be done before the beginning of
+the next course.
 
 > [!NOTE]
 > You need to enable the Kubernetes feature in Docker Desktop.
