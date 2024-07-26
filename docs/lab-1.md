@@ -16,25 +16,26 @@ the next course.
 
 ## Exercise 1: Create a Java image
 
-Create a Java image. The image should be built on top of OpenJDK 21 and
-Spring Boot. It should accept external traffic using port 8080 of the
-container. The image needs to have the environment variable `APP_TEAM`
-(e.g. `red`) to identify themselves as the owners of the service. This
-image must be built using the `docker build` command and must be run as
-a Docker container.
+Create a Docker image to package the Spring Boot application
+“weekend-server”, step by step.
 
-At the end of the lab session, your project is expected to meet the
-following requirements:
+``` mermaid
+graph LR
+    client[Client]
 
-- The Dockerfile is implemented correctly.
-- The Dockerfile can be built in one command using docker CLI.
-- The image is published to the repository `weekend-server-${TEAM}`,
-  e.g. `weekend-server-red`.
-- The image can be run using docker CLI, the container can be seen from
-  Docker runtime.
-- When sending an HTTP request to the server via URL
-  <http://localhost:8080>, it should return a valid response containing
-  an ID and a description explaining whether today is the weekend.
+    subgraph Container
+        direction LR
+        portin8080[Port 8080]
+        subgraph JVM["Java Virtual Machine"]
+            jar["Java Application (JAR)"]
+        end
+        env_vars["Environment\nVariables"]
+    end
+
+    client --> portin8080
+    portin8080 --> jar
+    env_vars --> jar
+```
 
 ### 1.1 Create a JAR without Docker
 
