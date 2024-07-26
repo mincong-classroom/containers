@@ -44,7 +44,7 @@ timeline
 
 For students attempting this course, the description of each lab session is available under the `docs/` directory, such as `lab-1.md`. For each report, you need to fill in the answers in the document in place in the answer areas. Or, you need to provide relevant code snippets in your Git repository following the instructions. The answers to each lab session will be distributed at the beginning of the next chapter, so the deadline for submitting your lab report is the beginning of the next session. The deadline for the last lab session will be the 1 Dec 2024 at midnight. Please complete everything before the deadline. All submissions after the deadline won't be taken into account.
 
-The score of the course is calculated based on the scores of the lab sessions, where each lab session is equally weighted. Each lab session has 20 points and the final score of the module is the average of the 5 lab sessions. For example, if you have 13, 17, 15, 14, and 16 for the 5 lab sessions, then the final score will be 15.
+The score of the course is calculated based on the scores of the lab sessions, where each lab session is equally weighted. Each lab session has 20 points and the final score of the module is the average of the 5 lab sessions. For example, if you have 13, 17, 15, 14, and 16 for the 5 lab sessions, then the final score will be 15. There is no exam at the end of the course.
 
 $$
 \text{Score} = \frac{13 + 17 + 15 + 14 + 16}{5} = \frac{75}{5} = 15
