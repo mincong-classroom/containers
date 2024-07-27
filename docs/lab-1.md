@@ -287,4 +287,4 @@ Suggestion:
     “PL/SQL”
 
 Provide a summary and key code snippets here and earn up to 5 points for
-your lab!
+your lab session!
