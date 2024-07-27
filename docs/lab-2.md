@@ -78,8 +78,8 @@ tag and the Git commit SHA tag. This job should be executed whenever new
 changes are introduced to the “main” branch. However, it should not be
 executed if the event is not triggered on the “main” branch,
 e.g. “development”, to avoid polluting the container repository. This
-job should only be executed if the previous job “weekend-server-release”
-is completed successfully. Please commit the code changes to the Git
+job should only be executed if the previous job “weekend-server-test” is
+completed successfully. Please commit the code changes to the Git
 repository directly. Also, can you prove that the updated image is
 working correctly?
 
