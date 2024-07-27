@@ -22,16 +22,17 @@ the next course.
 
 ## Exercise 1 - Run unit tests
 
-Replace the existing job “hello-world” with the job
-“weekend-server-test” which runs the unit tests of the Maven project
-“weekend-server”. The Java version should be the latest LTS: Java 21.
-This job should be run for any `push` event, regardless of the branch.
-For example, if a commit is pushed to the “main” branch or the
-“development” branch, the job should always be executed. Please commit
-the code changes to the Git repository directly. Then, take screenshots
-and describe where can you find the information related to the execution
-of the workflow, the status of the workflow, and the logs of the
-execution of the job.
+Replace the existing job “demo-test” with the job “weekend-server-test”
+which runs the unit tests of the Maven project “weekend-server”. The
+existing job is defined in `${PROJECT_ROOT}/.github/workflows/app.yml`.
+The Java version should be the latest LTS: Java 21. This job should be
+run for any `push` event, regardless of the branch. For example, if a
+commit is pushed to the “main” branch or the “development” branch, the
+job should always be executed. Please commit the code changes to the Git
+repository directly. Then, describe where can you find the information
+related to the GitHub Actions, including the execution of the workflow,
+the status of the workflow, and the logs of the execution of the job.
+Please also provide links to the actual execution(s).
 
   
 
@@ -60,10 +61,11 @@ is completed successfully. Please commit the code changes to the Git
 repository directly. Also, can you prove that the updated image is
 working correctly?
 
-> Hint: to log in to Docker Hub, you can use the secrets
-> `DOCKER_USERNAME` and `DOCKER_PASSWORD`, predefined by the teacher, in
-> the GitHub Action “docker/login-action@v3”:
-
+> [!NOTE]
+> To login to Docker Hub from the GitHub Actions, you can use
+> the secrets `DOCKER_USERNAME` and `DOCKER_PASSWORD`, predefined by the
+> teacher via the GitHub Action “docker/login-action@v3”:
+>
 > ``` yaml
 > - name: Log in to Docker Hub
 >   uses: docker/login-action@v3
