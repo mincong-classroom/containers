@@ -60,6 +60,17 @@ and then publish your Docker image.
 
     *\[answer\]*
 
+Could you provide additional information to the docker-build? Do you
+remember the field `appVersion` and `appBuiltAt` that we saw in the
+first chapter? Please use `--build-arg APP_VERSION=` and
+`--build-arg APP_BUILT_AT=` to provide those metadata in the
+docker-build command and write down your command as answer here. The
+value of the app version should be the SHA1 of the Git commit and the
+datetime should be the moment when the build was triggered. Update your
+dockerfile accordingly.
+
+    *\[answer\]*
+
   
 
 ## Exercise 3 - Release a Docker image
@@ -69,8 +80,8 @@ a Docker image of the Java application to Docker Hub. The final target
 should be the following repository:
 
 ``` sh
-mc144/weekend-server-${TEAM}
-# e.g. mc144/weekend-server-red
+mincongclassroom/weekend-server-${TEAM}
+# e.g. mincongclassroom/weekend-server-red
 ```
 
 You are expected to publish two tags for each new image: the `latest`
