@@ -9,8 +9,9 @@ continuous integration (CI) pipeline using GitHub Actions, including the
 definition of workflow, jobs, and the usage of actions and scripts. It
 also allows you to practice the skills related to the registry. At the
 end of this session, the Docker image of your Java application should be
-published to Docker Hub under Mincong’s account `mc144`
-(<https://hub.docker.com/u/mc144>) or your preferred account.
+published to Docker Hub under the Mincong Classroom account
+[`mincongclassroom`](https://hub.docker.com/u/mincongclassroom) or your
+preferred account.
 
 To submit the answers to this lab session, please fill in your answers
 in this document in-place. This should be done before the beginning of
@@ -50,7 +51,7 @@ terminal. This is a prerequisite for automating the publishing logic in
 the CI. You can login to the registry using the following syntax:
 
 ``` sh
-docker login registry-1.docker.io -u mc144
+docker login registry-1.docker.io -u mincongclassroom
 # enter password here (distributed during the course)
 ```
 
