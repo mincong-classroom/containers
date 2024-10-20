@@ -84,7 +84,7 @@ Please commit the changes and push them to your Git repository.
 
   
 
-### 1.2 Build your Docker image
+### 1.3 Build your Docker image
 
 Now you have your Dockerfile, try to build your Docker image using the
 command `docker build` with additional options. You are expected to
@@ -118,7 +118,7 @@ the command `docker images`. Then, fill information in the table below.
 
   
 
-### 1.3 Run your Docker image
+### 1.4 Run your Docker image
 
 Run your Docker image using the command `docker run`. Your container
 should receive HTTP requests on port 8080. Once your Docker container is
@@ -146,7 +146,7 @@ observe the response.
 
   
 
-### 1.4 Inspect Docker container
+### 1.5 Inspect Docker container
 
 Inspect the docker container using the command `docker ps`. What is the
 container ID of your Java container?
@@ -157,7 +157,7 @@ container ID of your Java container?
 
   
 
-### 1.5 Building the JAR in Docker
+### 1.6 Building the JAR in Docker
 
 In the previous step “1.2 Define a Dockerfile”, the JAR file wasn’t part
 of the Docker build. Can you refactor the Dockerfile, so that you build
