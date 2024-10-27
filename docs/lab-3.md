@@ -198,8 +198,9 @@ use?
 
   
 
-Can you find this java container using the `kubectl get` command with a
-label selector? See more information about labels and selectors at
+Can you find this java pod using the `kubectl get` command with a label
+selector? You have defined some labels in the previous exercise. See
+more information about labels and selectors at
 https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
 
   
