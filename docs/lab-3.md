@@ -116,8 +116,9 @@ Instead of using the `kubectl run` command, now you need to write a
 manifest to describe the specification of the pod in a YAML file. Copy
 the official example here:
 <https://kubernetes.io/docs/concepts/workloads/pods/#using-pods>. Add
-label `team=${team}` to the definition, and persist the YAML file in
-your Git repository under the path `${git_repo}/k8s/pod-nginx.yaml`.
+label `team=${team}` to the definition, where `team` is the value of
+your team in lower case. Persist the YAML file in your Git repository
+under the path `${git_repo}/k8s/pod-nginx.yaml`.
 
 Describe the full `kubectl apply` command used:
 
@@ -145,19 +146,28 @@ Write a Kubernetes manifest (YAML file) to create a pod for the Java
 Docker image “weekend-server” created in the previous lab sessions. This
 pod should also be called a “weekend-server”, running on the container
 port 8080, having labels `app=weekend-server`, `school=esigelec` and
-`team=${team}` (such as `team=red`). Persist the manifest in your Git
-repository under the path `${git_repo}/k8s/pod-weekend-server.yaml`
+`team=${team}`. Persist the manifest in your Git repository under the
+path `${git_repo}/k8s/pod-weekend-server.yaml`.
+
+In addition to the changes above, please also
+
+- Add environment variable `APP_TEAM` in the manifest to describe your
+  team for the container
+- Add environment variable `APP_AUTHORS` in the manifest to describe
+  yourselves as authors of the container. The format should be
+  “Firstname1 LASTNAME1, Firstname2 LASTNAME2”, such as “Emmanuel
+  MACRON”.
+- Find a way to propagate the pod name to the container, and update your
+  Java code to show the information as part of the HTTP response.
 
 ## Exercise 5 - Operate the Java pod
 
 In this exercise, you are going to use `kubectl exec` to connect to the
 container and inspect it.
 
-Connect to the pod and then use `jps -lvm` to describe the running Java
-process inside the Java pod. For more information about `jps`, see
-<https://docs.oracle.com/en/java/javase/21/docs/specs/man/jps.html>.
-Provide the process ID (PID) and the path of the JAR inside the
-container.
+Connect to the pod and then use `ps aux` to describe the running Java
+process inside the Java pod. Provide the process ID (PID) and the path
+of the JAR inside the container.
 
   
 
