@@ -1,27 +1,54 @@
-# Dockerfiles
+# Dockerfile
 
-Lab Session 1 - 28 Oct, 2024
+Lab Session 1 - 20 Oct, 2025
 
 ## Introduction
 
 The goal of this lab session is to practice your skills related to
-Dockerfiles. It includes the instructions for Dockerfile, the
-docker-build command, the architecture of Docker runtime, the inspection
-of a running container, and the storage of a container. It also includes
-skills learned from other courses, such as Maven commands from the
-course “Frameworks” and SQL commands from the course “PL/SQL”. Note that
-the Java image produced by this session **will be used in the lab
-sessions** of the following chapters. So please prioritize your work and
-ensure that it is done before the next lecture.
+Dockerfile. It includes the instructions used inside a Dockerfile, the
+commands for building and publishing an image, the architecture of
+Docker Runtime, and the inspection of a running Docker container. It
+also includes skills learned from other courses, such as Maven commands
+from the course “Frameworks” and SQL commands from the course “PL/SQL”.
+Just so you know, the Docker image produced by this session **will be
+used in the subsequent lab sessions**. Please prioritize your work and
+make sure it’s finished before the next lecture.
+
+``` mermaid
+%%{
+    init: {
+        'logLevel': 'debug',
+        'theme': 'base'
+    }
+}%%
+timeline
+    title Lab Session Objectives
+    1. Develop
+        : Package a Java application as a JAR
+        : Understand the internals of a JAR
+        : Define Docker image using Dockerfile
+    2. Build
+        : Build image using docker-build
+        : Login to a registry
+        : Publish image to a registry
+    3. Run
+        : Understand container runtime
+        : Run new containers
+        : Inspect running containers
+```
+
+The lab sessions of this course are developed around [Spring
+PetClinic](https://spring-petclinic.github.io), which is a list of
+open-source sample applications based on the Spring stack. The Spring
+PetClinic is a sample application designed to show how the Spring stack
+can be used to build simple, but powerful database-oriented
+applications.
 
 To submit the answers to this lab session, please fill in your answers
-in this document in-place. This should be done before the beginning of
-the next course.
+directly in this document. This must be done before the beginning of the
+next course.
 
-## Exercise 1: Create a Java image
-
-Create a Docker image to package the Spring Boot application
-“weekend-server”, step by step.
+## Exercise 1: Create a JAR without Docker
 
 ``` mermaid
 graph LR
@@ -41,24 +68,22 @@ graph LR
     env_vars --> jar
 ```
 
-### 1.1 Create a JAR without Docker
-
-Create a Java Archive (JAR) file using the source code available in your
-Git repository, under the directory `weekend-server/`. You can build it
-using Maven (`mvn`). Please provide the command that you used below.
-Then, what is the name of the JAR file produced by Maven? Once you find
-it, can you start the web server using the `java` command,
-e.g. `java -jar /path/to/my.jar`? What do you see if you visit the URL
+Create a Java Archive (JAR) file using the source code of
+[spring-projects/spring-petclinic](https://github.com/spring-projects/spring-petclinic).
+You can build it using Maven (`mvn`). Start the server using the `java`
+command line. What do you see if you visit the URL
 <http://localhost:8080> in your browser?
 
-> [!TIP]
-> To stop the Java server, you can press keys CTRL + C.
+``` sh
+# TODO(students): enter the commands for building and starting the Java server here
+```
 
-  
+Could you look over the content of the JAR file? Inspect the file
+entries, especially the content of the manifest.
 
-    *\[answer\]*
-
-  
+``` sh
+# TODO(students): paste the content of the file "META-INF/MANIFEST.MF" here
+```
 
   
 
