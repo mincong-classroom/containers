@@ -1,139 +1,238 @@
-# GitHub Actions
+# Pods in Kubernetes
 
-Lab Session 2 - 23 Oct, 2024
+Lab Session 2 - 21 Oct, 2025
 
 ## Introduction
 
-The goal of this lab session is to practice the development of a
-continuous integration (CI) pipeline using GitHub Actions, including the
-definition of workflow, jobs, and the usage of actions and scripts. It
-also allows you to practice the skills related to the registry. At the
-end of this session, the Docker image of your Java application should be
-published to Docker Hub under the Mincong Classroom account
-[`mincongclassroom`](https://hub.docker.com/u/mincongclassroom) or your
-preferred account.
+The goal of this lab session is to train your skills related to Pod and
+`kubectl`. It lets you practice Pod creation, your ability to read and
+edit Kubernetes manifests in YAML, operate Pods using `kubectl`, etc.
+
+``` mermaid
+timeline
+    title Lab Session Objectives
+    1. Kubernetes Overview
+        : Identity system components
+    2. Develop Pods
+        : Create a Pod with kubectl-run (imperative)
+        : Create a Pod with kubectl-apply (declarative)
+        : Create a Pod for your application
+        : Configure a Pod using environment variables
+    3. Operate Pods
+        : Execute commands in a running Pod
+        : Read the logs of a running Pod
+        : Troubleshoot a broken Pod
+```
 
 To submit the answers to this lab session, please fill in your answers
-in this document in-place. This should be done before the beginning of
+in this document in place. This should be done before the beginning of
 the next course.
 
-> [!IMPORTANT]
-> This lab session assumes that you completed lab session
-> 1, meaning that your Java application is successfully containerized.
-> It must be built in one single line of command, such as
-> `docker build weekend-server` without invoking `mvn` or other command
-> line tools. If it’s not the case, please notify the teacher.
-
-## Exercise 1 - Run unit tests
-
-Replace the existing job “demo-test” with the job “weekend-server-test”
-which runs the unit tests of the Maven project “weekend-server”. The
-existing job is defined in `${PROJECT_ROOT}/.github/workflows/app.yml`.
-The Java version should be the latest LTS: Java 21. This job should be
-run for any `push` event, regardless of the branch. For example, if a
-commit is pushed to the “main” branch or the “development” branch, the
-job should always be executed. Please commit the code changes to the Git
-repository directly. Then, describe where can you find the information
-related to the GitHub Actions, including the execution of the workflow,
-the status of the workflow, and the logs of the execution of the job.
-Please also provide links to the actual execution(s).
-
-  
-
-    *\[answer\]*
-
-  
-
-## Exercise 2 - Publish Docker image from localhost
-
-Build and publish a Docker image for the Java application from your
-terminal. This is a prerequisite for automating the publishing logic in
-the CI. You can login to the registry using the following syntax:
-
-``` sh
-docker login registry-1.docker.io -u mincongclassroom
-# enter password here (distributed during the course)
-```
-
-and then publish your Docker image.
-
-  
-
-    *\[answer\]*
-
-Could you provide additional information to the docker-build? Do you
-remember the field `appVersion` and `appBuiltAt` that we saw in the
-first chapter? Please use `--build-arg APP_VERSION=` and
-`--build-arg APP_BUILT_AT=` to provide those metadata in the
-docker-build command and write down your command as answer here. The
-value of the app version should be the SHA1 of the Git commit and the
-datetime should be the moment when the build was triggered. Update your
-dockerfile accordingly.
-
-    *\[answer\]*
-
-  
-
-## Exercise 3 - Release a Docker image
-
-Create a second job “weekend-server-release” which builds and publishes
-a Docker image of the Java application to Docker Hub. The final target
-should be the following repository:
-
-``` sh
-mincongclassroom/weekend-server-${TEAM}
-# e.g. mincongclassroom/weekend-server-red
-```
-
-You are expected to publish two tags for each new image: the `latest`
-tag and the Git commit SHA tag. This job should be executed whenever new
-changes are introduced to the “main” branch. However, it should not be
-executed if the event is not triggered on the “main” branch,
-e.g. “development”, to avoid polluting the container repository. This
-job should only be executed if the previous job “weekend-server-test” is
-completed successfully. Please commit the code changes to the Git
-repository directly. Also, can you prove that the updated image is
-working correctly?
-
 > [!NOTE]
-> To login to Docker Hub from the GitHub Actions, you can use
-> the secrets `DOCKER_USERNAME` and `DOCKER_PASSWORD`, predefined by the
-> teacher via the GitHub Action “docker/login-action@v3”:
->
-> ``` yaml
-> - name: Log in to Docker Hub
->   uses: docker/login-action@v3
->   with:
->     username: ${{ secrets.DOCKER_USERNAME }}
->     password: ${{ secrets.DOCKER_PASSWORD }}
-> ```
+> You need to enable the Kubernetes feature in Docker Desktop.
+> See the README of the Git repository for more details.
 
-For more information, you can visit this online tutorial: [Publishing
-Docker images - GitHub
-Docs](https://docs.github.com/en/actions/publishing-packages/publishing-docker-images).
+## Exercise 1 - Kubernetes Overview
+
+Observe the default containers started by Kubernetes using the command
+`kubectl get pods --all-namespaces`. Then, try to identify them in the
+cluster architecture diagram below. You don’t have to write down the
+mappings between the diagram and the output of the `kubectl` command,
+but you need to paste the results of the `kubectl` command here.
+
+![Kubernetes Architecture
+https://kubernetes.io/docs/concepts/architecture/](assets/kubernetes-cluster-architecture.svg)
 
   
 
-    *\[answer\]*
-
-## Clean up
-
-If you’re using the credentials of Mincong’s account, please logout from
-the docker command line once you finished the report.
-
 ``` sh
-docker logout registry-1.docker.io
+# TODO: paste the output of kubectl command
 ```
 
-## Going Further
+  
 
-Suggestion:
+In the diagram above, there are 2 worker nodes and one control-plane
+node (master node). How many nodes do you have on your machine? What is
+the name of the node?
 
-1.  Implement a CI solution to automate unit tests for one of the
-    modules of ESIGELEC or your personal projects.
-2.  Implement a CI solution to automate the packaging of your
-    application for one of the modules of ESIGELEC or your personal
-    projects.
+  
 
-Provide a summary and key code snippets here and earn up to 5 points for
-your lab session!
+``` sh
+# TODO: enter command and results
+```
+
+  
+
+## Exercise 2 - Create a nginx Pod (kubectl-run)
+
+Create a pod using the `kubectl run` command with the `nginx` Docker
+image, you should name the pod “nginx” and publish the container’s port
+80 to the Kubernetes cluster.
+
+  
+
+``` sh
+# TODO: enter your command here
+```
+
+  
+
+Ensure that the nginx container is running. Establish a connection with
+the container using the `kubectl port-forward pod/nginx 8080:80`, so
+that you can access the content via the host port 8080. Then, open your
+browser, visit <http://localhost:8080>, copy the content of the web page
+and paste it below.
+
+  
+
+``` sh
+# TODO: enter your command here
+```
+
+``` sh
+# TODO: enter web page content here
+```
+
+  
+
+Inspect the pod and describe its characteristics in the table below.
+Hint: you can use the following commands:
+
+- `kubectl describe pod nginx`
+- `kubectl get pod nginx`
+- `kubectl get pod nginx -o wide` with node information
+
+or learn more commands from `kubectl` Quick Reference.
+<https://kubernetes.io/docs/reference/kubectl/quick-reference/>
+
+  
+
+``` yaml
+# TODO: fill these fields
+container:
+  image: # TODO
+  port: # TODO
+  state: # TODO
+pod:
+  labels: # TODO
+  ip_address: # TODO
+  namespace: # TODO
+node:
+  name: # TODO
+```
+
+  
+
+Delete this pod using the `kubectl delete` command
+
+  
+
+``` sh
+# TODO: enter the command here
+```
+
+  
+
+## Exercise 3 - Create a nginx Pod (kubectl-apply)
+
+Instead of using the `kubectl run` command, now you need to write a
+manifest to describe the specification of the pod in a YAML file. Copy
+the official example here:
+<https://kubernetes.io/docs/concepts/workloads/pods/#using-pods>. Add
+label `team=${team}` to the definition, where `team` is the value of
+your team in lower case. Persist the YAML file in your Git repository
+under the path `${git_repo}/k8s/pod-nginx.yaml`.
+
+Describe the full `kubectl apply` command used:
+
+  
+
+``` sh
+# NOTE: write the answer to file "${REPO}/k8s/pod-nginx.yaml"
+```
+
+  
+
+Prove that the pod is running:
+
+  
+
+``` sh
+# TODO: enter command and results here
+```
+
+  
+
+## Exercise 4 - Create a Java Pod
+
+Write a Kubernetes manifest (YAML file) to create a pod for the Java
+Docker image “spring-petclinic” made in the previous lab sessions. This
+pod should also be called a “spring-petclinic”, running on the container
+port 8080, having labels `app=spring-petclinic` and `team=${team}`.
+Persist the manifest in your Git repository under the path
+`${git_repo}/k8s/pod-pet-clinic.yaml`.
+
+  
+
+  
+
+## Exercise 5 - Operate a Java Pod
+
+In this exercise, you are going to use `kubectl exec` to connect to the
+container and inspect it.
+
+Connect to the pod and then use `ps aux` to describe the running Java
+process inside the Java pod. Provide the process ID (PID) and the path
+of the JAR inside the container.
+
+  
+
+``` sh
+# TODO: enter command and results here
+```
+
+  
+
+What is the version of Java used?
+
+  
+
+``` sh
+# TODO: enter command and results here
+```
+
+  
+
+Can you inspect the logs of the Java container: what command would you
+use?
+
+  
+
+``` sh
+# TODO: enter command and results here
+```
+
+  
+
+Can you find this java pod using the `kubectl get` command with a label
+selector? You have defined some labels in the previous exercise. See
+more information about labels and selectors at
+https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
+
+  
+
+``` sh
+# TODO: enter command and results here
+```
+
+  
+
+## Exercise 6 - Fix a broken Pod
+
+Create a Pod using the following command:
+
+``` sh
+kubectl apply -f https://mincong.io/k8s/lab/broken-pod.yaml
+```
+
+Is the Pod running? Please troubleshoot.
