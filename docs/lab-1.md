@@ -103,7 +103,7 @@ Please commit the changes and push them to GitHub.
   
 
 ``` dockerfile
-# Note: commit your changes to the file "spring-petclinic/Dockerfile"
+# NOTE: commit your changes to the file "spring-petclinic/Dockerfile"
 ```
 
   
