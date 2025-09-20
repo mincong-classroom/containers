@@ -15,12 +15,6 @@ used in the subsequent lab sessions**. Please prioritize your work and
 make sure it’s finished before the next lecture.
 
 ``` mermaid
-%%{
-    init: {
-        'logLevel': 'debug',
-        'theme': 'base'
-    }
-}%%
 timeline
     title Lab Session Objectives
     1. Develop
@@ -60,7 +54,8 @@ graph LR
         subgraph JVM["Java Virtual Machine"]
             jar["Java Application (JAR)"]
         end
-        env_vars["Environment\nVariables"]
+        env_vars["`Environment
+        Variables`"]
     end
 
     client --> portin8080
@@ -70,16 +65,23 @@ graph LR
 
 Create a Java Archive (JAR) file using the source code of
 [spring-projects/spring-petclinic](https://github.com/spring-projects/spring-petclinic).
-You can build it using Maven (`mvn`). Start the server using the `java`
-command line. What do you see if you visit the URL
-<http://localhost:8080> in your browser?
+To facilitate the lab session, the source code has been embedded into
+your repository under `apps/spring-petclinic`. You can build it using
+Maven (`mvn`). Start the server using the `java` command line. What do
+you see if you visit the URL <http://localhost:8080> in your browser?
+
+  
 
 ``` sh
 # TODO: enter the commands for building and starting the Java server here
 ```
 
+  
+
 Could you look over the content of the JAR file? Inspect the file
 entries, especially the content of the manifest.
+
+  
 
 ``` sh
 # TODO: paste the content of the file "META-INF/MANIFEST.MF" here
@@ -97,21 +99,21 @@ small image to reduce the container size. The Java Archive (JAR) file
 should be built outside of Docker via the command you used in the
 previous question. Expose port 8080 of the container so that it can
 accept requests from the clients. The Dockerfile should be stored under
-the following directory: `${REPO_ROOT}/spring-petclinic/Dockerfile`.
+the following directory: `${REPO}/apps/spring-petclinic/Dockerfile`.
 Please commit the changes and push them to GitHub.
 
   
 
 ``` dockerfile
-# NOTE: commit your changes to the file "spring-petclinic/Dockerfile"
+# NOTE: commit your changes to the file "apps/spring-petclinic/Dockerfile"
 ```
 
   
 
-Now that you have your Dockerfile, try to build your Docker images using
-Docker BuildKit. You are expected to build an image that supports x86-64
-architecture (`linux/amd64`). This build command should be executed from
-the root directory of the Git repository `${REPO_ROOT}`.
+Now that you have your Dockerfile, try to build your Docker images. You
+are expected to build an image that supports x86-64 architecture
+(`linux/amd64`). This build command should be executed from the root
+directory of the Git repository `${REPO_ROOT}`.
 
   
 
@@ -137,10 +139,6 @@ running.
 ```
 
 ``` sh
-# TODO: paste the docker command for finding the logs
-```
-
-``` sh
 # TODO: paste the logs here
 ```
 
@@ -155,14 +153,20 @@ account “Mincong Classroom” (https://hub.docker.com/u/mincongclassroom).
 The target repository should be prefixed by “spring-petclinic”, followed
 by the name of your team in lowercase.
 
-    mincongclassroom/spring-petclinic-${team}
+``` sh
+mincongclassroom/spring-petclinic-${team}
+```
 
 The teacher will distribute the credentials for authenticating to the
 registry during the lab session. The release version should be `1.0.0`.
 
+  
+
 ``` sh
 # TODO: Paste the publish command here
 ```
+
+  
 
 ## Exercise 5: Inspect Docker container
 
@@ -171,3 +175,10 @@ Inspect the Docker container and find out its container ID.
 ``` sh
 # TODO: paste the command used here
 ```
+
+## Exercise 6: Add team name
+
+Add your team name in the footer of the Spring PetClinic UI. Build and
+publish it as new version “1.1.0” to DockerHub.
+
+  
