@@ -17,11 +17,13 @@ timeline
         : Create a Pod with kubectl-run (imperative)
         : Create a Pod with kubectl-apply (declarative)
         : Create a Pod for your application
-        : Configure a Pod using environment variables
+        : Edit the Pod manifest, such as image tag and environment variables
     3. Operate Pods
         : Execute commands in a running Pod
-        : Read the logs of a running Pod
-        : Troubleshoot a broken Pod
+        : Find events and status of a Pod
+        : Read the logs produced by a Pod
+        : Delete a Pod
+        : Read information available on a container registry
 ```
 
 To submit the answers to this lab session, please fill in your answers
@@ -232,7 +234,18 @@ https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
 Create a Pod using the following command:
 
 ``` sh
-kubectl apply -f https://mincong.io/k8s/lab/broken-pod.yaml
+kubectl apply -f https://mincong.io/esigelec/lab/broken-pod.yaml
 ```
 
-Is the Pod running? Please troubleshoot.
+Is the Pod running? Please troubleshoot and make sure that the Pod is
+running at the end.
+
+  
+
+``` sh
+# TODO: enter commands and analysis
+```
+
+``` sh
+# TODO: prove that the Pod is running
+```
