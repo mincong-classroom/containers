@@ -183,6 +183,6 @@ Inspect the Docker container and find out its container ID.
 ## Exercise 6: Add team name
 
 Add your team name in the footer of the Spring PetClinic UI. Build and
-publish it as new version “1.1.0” to DockerHub.
+publish a new Docker image as version “1.1.0” to DockerHub.
 
   
