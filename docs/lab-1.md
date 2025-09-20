@@ -172,9 +172,13 @@ registry during the lab session. The release version should be `1.0.0`.
 
 Inspect the Docker container and find out its container ID.
 
+  
+
 ``` sh
 # TODO: paste the command used here
 ```
+
+  
 
 ## Exercise 6: Add team name
 
