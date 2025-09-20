@@ -243,8 +243,7 @@ running at the end.
   
 
 ``` sh
-# TODO: enter commands and analysis; new Pod manifest should be stored under
-#   ${REPO}/k8s/pod-hello-server.yaml
+# TODO: enter commands and analysis
 ```
 
 ``` sh
