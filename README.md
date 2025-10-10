@@ -1,37 +1,27 @@
 # Assignments
 
-Welcome to the lab sessions! This is a mono-repository for the assignments of the course "Kubernetes" for the students of [ESIGELEC](https://esigelec.fr), majoring in "Ingenierie des Services du Numerique" (ISN). It includes 3 sections, 5 lab sessions, and is composed of different key objectives as described below:
+Welcome to the lab sessions! This is a mono-repository for the assignments of the course "Kubernetes" for the students of [ESIGELEC](https://esigelec.fr), majoring in "Ingenierie des Services du Numerique" (ISN). It includes 2 sections, 5 lab sessions, and is composed of different key objectives as described below:
 
 ```mermaid
-%%{
-    init: {
-        'logLevel': 'debug',
-        'theme': 'base'
-    }
-}%%
 timeline
     title Lab Sessions Timeline
     section Containers
         §1 Containerization with Docker
             : Package Java application as a JAR
             : Create Docker image
+            : Publish Docker image to a registry
             : Run Docker image
-    section CI/CD
-        §2 Continuous Integration
-            : Run unit tests in GitHub Actions
-            : Build Docker image in GitHub Actions
-            : Publish Docker image to Docker Hub
-        §3.1 Continuous Delivery
-            : Deploy Docker image to Amazon Elastic Container Service (ECS) with GitHub Actions
     section Kubernetes
-        §3.2 Introduction
-            : Explore Kubernetes cluster with kubectl
-            : Create a Pod for a frontend application
-            : Create a Pod for a Java application
-            : Operate a Pod with kubectl
-        §4 Deployment and Networking
-            : Create a ReplicaSet
+        §2 Pods
+            : Explore a Kubernetes cluster with kubectl
+            : Create Pods in different ways
+            : Operate Pods with kubectl
+        §3 Deployment
+            : Create a new ReplicaSet
             : Create a Deployment
+            : Understand Deployment characteristics
+            : Adapt microservice architecture
+        §4 Networking
             : Create a Service
             : Roll out a new version of the application
         §5 Configuration and Storage
