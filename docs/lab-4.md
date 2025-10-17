@@ -1,6 +1,6 @@
 # Kubernetes Networking
 
-Lab Session 4 - 29 Oct, 2024
+Lab Session 4 - 29 Oct, 2025
 
 ## Introduction
 
