@@ -1,201 +1,127 @@
-# Deployment and Networking in Kubernetes
+# Kubernetes Networking
 
-Lab Session 4 - 7 Nov, 2024
+Lab Session 4 - 29 Oct, 2025
 
-# Introduction
+## Introduction
 
-The goal of this lab session is to let you practice the basics of
-deployment and networking in Kubernetes, which includes the creation of
-a ReplicaSet, the creation of a Deployment, the ability to read and edit
-Kubernetes manifests in YAML, the configuration of commonly used
-networking solutions, and the operations associated to these objectives.
+The goal of this lab session is to let you practice the networking
+basics in Kubernetes and apply them in real-world scenarios, i.e. in
+multiple environments and in cross-team collaboration.
 
 To submit the answers to this lab session, please fill in your answers
 in this document in-place. This should be done before the beginning of
 the next course.
 
-## Exercise 1 - ReplicaSet
+## Exercise 1 - Hello Server
+
+Expose the demo application
+[`hello-server`](https://hub.docker.com/r/mincongclassroom/hello-server)
+in Kubernetes.
+
+Create a new Deployment called `hello-server-deployment` for the
+application `hello-server`
+(https://hub.docker.com/r/mincongclassroom/hello-server). This is the
+image that you have fixed in Lab Session 1. The Deployment should have 1
+replica. Then, expose the application as an internal Service called
+`hello` in Kubernetes, under the port 80. Validate that the
+implementation is working and document it in this page.
+
+## Exercise 2 - PetClinic Microservice
+
+Under the existing stack of the Spring PetClinic (deployed in Lab
+Session 3), expose the API gateway as a Service of type NodePort under
+the port `30000`. Validate that the solution implementation is working
+and document it in this page.
+
+## Exercise 3 - PetClinic Environments
+
+Create two namespaces: `prod` and `dev`. Each namespace should contain
+the whole stack in microservice, including the API gateway and the
+backend services.
+
+- In the prod namespace, use version `3.0` of the Docker images, created
+  in Lab Session 3. All resources should contain the label `env=prod`.
+- In the dev namespace, use version `3.0` of the Docker images, created
+  in Lab Session 3. Note: later on, they will be replaced by new images
+  `4.x` created in this session. All resource should contain the label
+  `env=dev`.
+
+Also, add the label `clinic=${clinic}`. Is the Pet Clinic still
+accessible? If not, please fix it. Describe your observations and fixes
+in this page.
+
+## Exercise 4 - Cross-team Collaboration
+
+In this exercise, you will collaborate with other teams to improve the
+Pet Clinic service together in the `dev` namespace. Each team uses the
+Kubenetes cluster in your computer, but you can deploy new Docker image
+to update the logic of the microservices, and update the Kubernetes
+resources (Deployment, Service, …) to change your infrastructure.
+
+## Exercise 4C - Email Support
+
+The pet owners are managed by the `customers-service`. Currently,
+registering an owner does not require an email. But this is an important
+way of communication nowadays. Could you add this feature? You should
+implemente the backend logic and collaborate with the frontend team for
+the frontend logic.
+
+Here are some requirements:
+
+- In the UI, the owner registration form should contain a new field
+  “Email”
+- In the UI, email should be read-only when editing owner’s information
+- In the UI, email should be displayed in the owner page
+- In the backend, the email should be validated
+- In the backend, the email information should be persisted in the
+  database
+- In the backend, the email should be part of the Owner Listing API
+
+The result should be built and deployed as image `4.x` in DockerHub
+(e.g. `4.0`, `4.1`, …). Don’t overwrite existing images. If you need
+additional changes, push another image.
+
+Describe what you implemented here, including key code changes, UI
+changes. Also, how you validate your changes.
+
+## Exercise 4V - Veterinarian Qualification
+
+The pet owners needs more information from the veterinarians before
+trusting them to treat their pets. Please add a field “diplomas” to
+represent a list of additional diplomas that the veterinarian has. It
+helps justifying his/her specialization. You can use the following
+abbreviations:
+
+- `DESV`: Diplôme d’Études Spécialisées Vétérinaires — equivalent to a
+  French medical specialization.
+- `CES`: Certificat d’Études Spécialisées — an older qualification, but
+  still valid.
+- `DIPL`: European or American “Diplomate” titles (e.g. Dipl. ECVS for
+  surgery, Dipl. ECVIM for internal medicine, etc.) — these represent
+  the highest level of expertise recognized internationally.
+
+Here are some requirements
+
+- This new field should be part of the Veterinarians Listing API
+- This new field should be displayed in the Veterinarians page
+- This new field should be persisted in the database
+
+Then, create a new API to register a veterinarian, similar to the “owner
+registration”.
+
+## Exercise 4F - UI Support
+
+Collaborate with the Customers team and the Veterinarian team to support
+the new use cases: the email of the customer, and the diplomas of the
+veterinarians.
 
-Create a new ReplicaSet with 2 replicas and the Docker image
-`nginx:1.26` and call this resource `nginx`. Use labels
-`school=esigelec`, `app=nginx`, `team=${team}`, and `tier=frontend` for
-both the ReplicaSet and the underlying pods. The pods should expose the
-container port 80 to receive incoming traffic. The name of the container
-should also be “nginx”. Persist the Kubernetes manifest (YAML file) in
-the Git repository of your team under the `k8s` directory as file
-`replicaset-nginx.yaml`.
+Email support:
 
-  
+- The owner registration form should contain a new field “Email”
+- Email should be read-only when editing owner’s information
+- Email should be displayed in the owner page
 
-    *\[answer: optional. Commit code changes directly under the `k8s`
-directory.\]*
+Veterinarians support:
 
-  
-
-  
-
-Scale this ReplicaSet to 3 replicas using `kubectl` and provide your
-command below.
-
-  
-
-    *\[answer\]*
-
-  
-
-  
-
-Delete one of the pods from this ReplicaSet, how many pods do you have
-now? Why?
-
-  
-
-    *\[answer\]*
-
-  
-
-  
-
-## Exercise 2 - Deployment
-
-Create a new Deployment with 2 replicas using the Docker image
-`mincongclassroom/weekend-server-${team}` that you built in the previous
-lab session and call this deployment `weekend-server`. Use labels
-`school=esigelec`, `app=weekend-server`, `team=${team}`, and
-`tier=backend` for both the Deployment and the underlying pods. Persist
-the Kubernetes manifest (YAML file) in the Git repository of your team
-under the `k8s` directory as file `deployment-weekend-server.yaml`.
-
-In addition to the changes above, please also
-
-- Add environment variable `APP_TEAM` in the manifest to describe your
-  team for the container
-- Add environment variable `APP_AUTHORS` in the manifest to describe
-  yourselves as authors of the container. The format should be
-  “Firstname1 LASTNAME1, Firstname2 LASTNAME2”, such as “Emmanuel
-  MACRON”.
-- Propagate the pod name to the container.
-
-  
-
-    *\[answer: optional. Commit code changes directly under the `k8s`
-directory.\]*
-
-  
-
-  
-
-Do you see a ReplicaSet related to your deployment? If yes, write down
-the name of the ReplicaSet, else please share your thoughts. Hint: you
-can use the command `kubectl get all` to list all the resources in your
-Kubernetes cluster under the current namespace.
-
-  
-
-    *\[answer\]*
-
-  
-
-  
-
-Scale up the deployment to 3 replicas and share the command below.
-
-  
-
-    *\[answer\]*
-
-  
-
-  
-
-Upgrade the Docker image of the weekend-server deployment by setting the
-image to another version that you built. Roll out this change and
-observe the status of the Pods, ReplicaSet, and Deployment. Please
-describe your observation here.
-
-  
-
-    *\[answer\]*
-
-  
-
-  
-
-Inspect the revision history of your deployment.
-
-  
-
-    *\[answer\]*
-
-  
-
-  
-
-What if you specify an image that does not exist?
-
-    *\[answer\]*
-
-  
-
-  
-
-## Exercise 3 - Service
-
-Provide a networking solution for weekend-server application so that
-this deployment is exposed to other resources inside the Kubernetes
-cluster. Please ensure that access is only granted for resources within
-the Kubernetes cluster, access from external systems is not allowed.
-Persist the Kubernetes manifest (YAML file) in the Git repository of
-your team under the `k8s` directory as file
-`service-weekend-server.yaml`.
-
-  
-
-    *\[answer: optional. Commit code changes directly under the `k8s`
-directory.\]*
-
-  
-
-  
-
-Port forward to that service by listening to port 8080 of your machine
-and forwarding data to your service weekend-server to verify that the
-service is working as expected. Please share the kubectl command.
-
-  
-
-    *\[answer\]*
-
-  
-
-  
-
-Use another to verify that this is working as expected. Please create a
-helper pod with the image
-[curlimages/curl](https://hub.docker.com/r/curlimages/curl) using the
-command below. Try to use different DNS queries to send HTTP requests to
-the service. Reminder: after starting the curl image, you can use `curl`
-command followed by the URL to make an HTTP request. You can exit the
-pod by pressing CTRL + D (‘D’ stands for disconnect).
-
-``` sh
-kubectl run curl-pod --image=curlimages/curl --restart=Never --rm -it -- /bin/sh
-# curl ${URL}
-```
-
-Here is a reminder of different expressions:
-
-| Form | Expression |
-|:---|:---|
-| Short form | `${service}` |
-| Namespace qualified | `${service}.${namespace}` |
-| Service domain | `${service}.${namespace}.svc` |
-| Fully qualified domain name (FQDN) | `${service}.${namespace}.svc.cluster.local` |
-
-Please provide the commands and results below.
-
-  
-
-    *\[answer\]*
-
-  
+- Diplomas should be part of the Verterinarians Listing
+- A new page should be created for registering a new Verterinarian
