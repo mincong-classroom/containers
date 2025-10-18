@@ -1,10 +1,9 @@
 # Assignments
 
-Welcome to the lab sessions! This is a mono-repository for the assignments of the course "Kubernetes" for the students of [ESIGELEC](https://esigelec.fr), majoring in "Ingenierie des Services du Numerique" (ISN). It includes 2 sections, 5 lab sessions, and is composed of different key objectives as described below:
+Welcome to the lab sessions! This is a mono-repository for the assignments of the course "Kubernetes" for the students of [ESIGELEC](https://esigelec.fr), majoring in "Ingénierie des Services du Numérique" (ISN). It includes 2 sections, 5 lab sessions, and is composed of different key objectives as described below:
 
 ```mermaid
 timeline
-    title Lab Sessions Timeline
     section Containers
         §1 Containerization with Docker
             : Package Java application as a JAR
@@ -24,9 +23,10 @@ timeline
         §4 Networking
             : Create a Service
             : Roll out a new version of the application
+            : Collaborate with other teams to develop new features
         §5 Configuration and Storage
             : Create a ConfigMap
-            : Create a PersistentVolume
+            : Set up a new workload end-to-end
 ```
 
 ## Report Submission
