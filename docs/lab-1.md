@@ -1,22 +1,22 @@
-# Dockerfile
+# Containerize Pet Clinic
 
 Lab Session 1 - 20 Oct, 2025
 
 ## Introduction
 
+Your team needs to create a Docker image for the Spring PetClinic
+application.
+
 The goal of this lab session is to practice your skills related to
 Dockerfile. It includes the instructions used inside a Dockerfile, the
 commands for building and publishing an image, the architecture of
-Docker Runtime, and the inspection of a running Docker container. It
-also includes skills learned from other courses, such as Maven commands
-from the course “Frameworks” and SQL commands from the course “PL/SQL”.
-Just so you know, the Docker image produced by this session **will be
-used in the subsequent lab sessions**. Please prioritize your work and
-make sure it’s finished before the next lecture.
+Docker Runtime, and the inspection of a running Docker container. Just
+so you know, the Docker image produced by this session **will be used in
+the subsequent lab sessions**. Please prioritize your work and make sure
+it’s finished before the next lecture.
 
 ``` mermaid
 timeline
-    title Lab Session Objectives
     1. Develop
         : Package a Java application as a JAR
         : Understand the internals of a JAR
