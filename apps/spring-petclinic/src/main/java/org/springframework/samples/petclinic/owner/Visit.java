@@ -43,10 +43,10 @@ public class Visit extends BaseEntity {
 	private String description;
 
 	/**
-	 * Creates a new instance of Visit for the current date
+	 * Creates a new instance of Visit for tomorrow
 	 */
 	public Visit() {
-		this.date = LocalDate.now();
+		this.date = LocalDate.now().plusDays(1);
 	}
 
 	public LocalDate getDate() {

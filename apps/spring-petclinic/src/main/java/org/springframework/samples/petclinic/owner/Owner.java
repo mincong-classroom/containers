@@ -17,6 +17,7 @@ package org.springframework.samples.petclinic.owner;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.core.style.ToStringCreator;
 import org.springframework.samples.petclinic.model.Person;
@@ -47,15 +48,15 @@ import jakarta.validation.constraints.NotBlank;
 @Table(name = "owners")
 public class Owner extends Person {
 
-	@Column(name = "address")
+	@Column
 	@NotBlank
 	private String address;
 
-	@Column(name = "city")
+	@Column
 	@NotBlank
 	private String city;
 
-	@Column(name = "telephone")
+	@Column
 	@NotBlank
 	@Pattern(regexp = "\\d{10}", message = "{telephone.invalid}")
 	private String telephone;
@@ -94,9 +95,18 @@ public class Owner extends Person {
 	}
 
 	public void addPet(Pet pet) {
-		if (pet.isNew()) {
-			getPets().add(pet);
+		if (pet == null) {
+			return;
 		}
+		if (getPets().contains(pet)) {
+			return;
+		}
+		for (Pet existingPet : getPets()) {
+			if (!existingPet.isNew() && !pet.isNew() && Objects.equals(existingPet.getId(), pet.getId())) {
+				return;
+			}
+		}
+		getPets().add(pet);
 	}
 
 	/**
@@ -117,7 +127,7 @@ public class Owner extends Person {
 		for (Pet pet : getPets()) {
 			if (!pet.isNew()) {
 				Integer compId = pet.getId();
-				if (compId.equals(id)) {
+				if (Objects.equals(compId, id)) {
 					return pet;
 				}
 			}

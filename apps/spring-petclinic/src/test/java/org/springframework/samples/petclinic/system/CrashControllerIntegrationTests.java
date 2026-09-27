@@ -26,11 +26,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration;
-import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
+import org.springframework.boot.hibernate.autoconfigure.HibernateJpaAutoConfiguration;
+import org.springframework.boot.jdbc.autoconfigure.DataSourceAutoConfiguration;
+import org.springframework.boot.jdbc.autoconfigure.DataSourceTransactionManagerAutoConfiguration;
+import org.springframework.boot.resttestclient.TestRestTemplate;
+import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureTestRestTemplate;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -47,17 +48,18 @@ import org.springframework.http.ResponseEntity;
  */
 // NOT Waiting https://github.com/spring-projects/spring-boot/issues/5574
 @SpringBootTest(webEnvironment = RANDOM_PORT,
-		properties = { "server.error.include-message=ALWAYS", "management.endpoints.enabled-by-default=false" })
+		properties = { "spring.web.error.include-message=ALWAYS", "management.endpoints.access.default=none" })
+@AutoConfigureTestRestTemplate
 class CrashControllerIntegrationTests {
 
-	@Value(value = "${local.server.port}")
+	@Value("${local.server.port}")
 	private int port;
 
 	@Autowired
 	private TestRestTemplate rest;
 
 	@Test
-	void testTriggerExceptionJson() {
+	void triggerExceptionJson() {
 		ResponseEntity<Map<String, Object>> resp = rest.exchange(
 				RequestEntity.get("http://localhost:" + port + "/oups").build(),
 				new ParameterizedTypeReference<Map<String, Object>>() {
@@ -73,7 +75,7 @@ class CrashControllerIntegrationTests {
 	}
 
 	@Test
-	void testTriggerExceptionHtml() {
+	void triggerExceptionHtml() {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setAccept(List.of(MediaType.TEXT_HTML));
 		ResponseEntity<String> resp = rest.exchange("http://localhost:" + port + "/oups", HttpMethod.GET,
