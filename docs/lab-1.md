@@ -1,6 +1,6 @@
 # Containerize Pet Clinic
 
-Lab Session 1 - 20 Oct, 2025
+Lab Session 1 - 22 Oct, 2026
 
 ## Introduction
 
@@ -99,8 +99,9 @@ small image to reduce the container size. The Java Archive (JAR) file
 should be built outside of Docker via the command you used in the
 previous question. Expose port 8080 of the container so that it can
 accept requests from the clients. The Dockerfile should be stored under
-the following directory: `${REPO}/apps/spring-petclinic/Dockerfile`.
-Please commit the changes and push them to GitHub.
+the following directory:
+`${REPO_ROOT}/apps/spring-petclinic/Dockerfile`. Please commit the
+changes and push them to GitHub.
 
   
 
@@ -183,6 +184,6 @@ Inspect the Docker container and find out its container ID.
 ## Exercise 6: Add team name
 
 Add your team name in the footer of the Spring PetClinic UI. Build and
-publish a new Docker image as version “1.1.0” to DockerHub.
+publish a new Docker image as version “1.1.0” to Docker Hub.
 
   
