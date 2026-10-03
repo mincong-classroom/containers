@@ -143,14 +143,14 @@ the official example here:
 <https://kubernetes.io/docs/concepts/workloads/pods/#using-pods>. Add
 label `team=${team}` to the definition, where `team` is the value of
 your team in lower case. Persist the YAML file in your Git repository
-under the path `${git_repo}/k8s/pod-nginx.yaml`.
+under the path `${git_repo}/k8s/lab-2/pod-nginx.yaml`.
 
 Describe the full `kubectl apply` command used:
 
   
 
 ``` sh
-# NOTE: write the answer to file "${REPO}/k8s/pod-nginx.yaml"
+# NOTE: write the answer to file "${REPO}/k8s/lab-2/pod-nginx.yaml"
 ```
 
   
@@ -172,12 +172,12 @@ Docker image “spring-petclinic” made in the previous lab session. This
 pod should also be called a “spring-petclinic”, running on the container
 port 8080, having labels `app=spring-petclinic` and `team=${team}`.
 Persist the manifest in your Git repository under the path
-`${git_repo}/k8s/pod-petclinic.yaml`.
+`${git_repo}/k8s/lab-2/pod-petclinic.yaml`.
 
   
 
 ``` sh
-# NOTE: write the answer to file "${REPO}/k8s/pod-petclinic.yaml"
+# NOTE: write the answer to file "${REPO}/k8s/lab-2/pod-petclinic.yaml"
 ```
 
   
@@ -248,7 +248,7 @@ running at the end.
 
 ``` sh
 # TODO: enter commands and analysis; new Pod manifest should be stored under
-#   ${REPO}/k8s/pod-team-info-server.yaml
+#   ${REPO}/k8s/lab-2/pod-team-info-server.yaml
 ```
 
 ``` sh
