@@ -24,11 +24,11 @@ in the namespace `classroom` in Kubernetes.
 
 Create a new Deployment called `team-info` for the Docker image
 [`mincongclassroom/team-info-server`](https://hub.docker.com/r/mincongclassroom/team-info-server).
-This is the image that you have used in Lab Session 1. The Deployment
+This is the image that you have used in Lab Session 2. The Deployment
 should have 1 replica. Then expose the application as an internal
 Service named `team-info` in Kubernetes on port 80. Note that the web
 server may not start successfully on the first attempt, so you need to
-repair it (in the same way that you fixed it in Lab Session 1). Inspect
+repair it (in the same way that you fixed it in Lab Session 2). Inspect
 the Pod and its logs to understand the underlying issues. You need to
 store the manifest (YAML file) under the path
 `k8s/lab-4/app-team-info.yaml`, which contains both the Service and the
