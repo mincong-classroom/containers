@@ -148,7 +148,7 @@ Apply the following manifest, and ensure that the whole stack is
 working:
 
 ``` sh
-kubectl apply -f https://mincong.io/esigelec/lab/microservice.yaml
+kubectl apply -f https://mincong.io/esigelec/lab/3/microservices.yaml
 ```
 
   
