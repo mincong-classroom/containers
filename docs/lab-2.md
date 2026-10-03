@@ -238,7 +238,7 @@ https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
 Create a Pod using the following command:
 
 ``` sh
-kubectl apply -f https://mincong.io/esigelec/lab/broken-pod.yaml
+kubectl apply -f https://mincong.io/esigelec/lab/2/broken-pod.yaml
 ```
 
 Is the Pod running? Please troubleshoot and make sure that the Pod is

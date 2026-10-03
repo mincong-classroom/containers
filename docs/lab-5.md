@@ -64,9 +64,9 @@ Hints:
 
 - You should reference the Secret “openai” created in Exercise 1.
 - A new version of the Pet Clinic Micoservices stack is available under
-  <https://mincong.io/esigelec/lab/microservice5.yaml>
+  <https://mincong.io/esigelec/lab/5/microservices.yaml>
 - The configuration of the API Gateway is defined under the ConfigMap
-  “api-gateway-config” in the “microservice5.yaml”.
+  “api-gateway-config” of this manifest.
 - You can verify whether the API key is referenced by the GenAI service
   by printing the value of the environment variable via a `kubectl exec`
   command.
