@@ -58,7 +58,7 @@ start the workload:
 OPENAI_API_KEY='sk-...'
 ```
 
-Please commit your changes to the file `k8s/lab5.microservices.yaml`.
+Please commit your changes to the file `k8s/lab-5/microservices.yaml`.
 
 Hints:
 
@@ -75,5 +75,5 @@ Hints:
 
 ``` sh
 # TODO: develop the whole solution and describe what you do here.
-#   Commit the manifests changes to the file "${REPO}/k8s/lab5.microservices.yaml"
+#   Commit the manifests changes to the file "${REPO}/k8s/lab-5/microservices.yaml"
 ```

@@ -38,12 +38,12 @@ receive incoming traffic. The container name should be `main` in the
 ReplicaSet. Please don’t use the local image; instead, you should use
 the Docker Image published to Docker Hub. Persist the Kubernetes
 manifest (YAML file) in the Git repository as file
-`k8s/replicaset-petclinic.yaml`.
+`k8s/lab-3/replicaset-petclinic.yaml`.
 
   
 
 ``` sh
-# TODO: write the answer to file "${REPO}/k8s/replicaset-petclinic.yaml"
+# TODO: write the answer to file "${REPO}/k8s/lab-3/replicaset-petclinic.yaml"
 ```
 
   
@@ -78,12 +78,12 @@ Docker image “spring-petclinic”. Use labels `app=spring-petclinic` and
 underlying container should use port 8080 to receive incoming traffic.
 The container name should be `main` in the Deployment. Persist the
 Kubernetes manifest (YAML file) in the Git repository as file
-`k8s/deployment-petclinic.yaml`.
+`k8s/lab-3/deployment-petclinic.yaml`.
 
   
 
 ``` sh
-# TODO: write the answer to file "${REPO}/k8s/deployment-petclinic.yaml"
+# TODO: write the answer to file "${REPO}/k8s/lab-3/deployment-petclinic.yaml"
 ```
 
   
@@ -95,7 +95,7 @@ name in lowercase. Observe the rollout history.
   
 
 ``` sh
-# TODO: write the answer to file "${REPO}/k8s/deployment-petclinic.yaml"
+# TODO: write the answer to file "${REPO}/k8s/lab-3/deployment-petclinic.yaml"
 ```
 
 ``` sh
@@ -154,7 +154,7 @@ kubectl apply -f https://mincong.io/esigelec/lab/microservice.yaml
   
 
 ``` sh
-# TODO: write the answer to file "${REPO}/k8s/microservice.lab3.yaml"
+# TODO: write the answer to file "${REPO}/k8s/lab-3/microservices.yaml"
 ```
 
   
