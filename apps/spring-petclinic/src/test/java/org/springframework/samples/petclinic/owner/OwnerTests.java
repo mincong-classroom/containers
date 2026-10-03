@@ -13,27 +13,39 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.springframework.samples.petclinic.owner;
 
-import java.util.List;
+import org.junit.jupiter.api.Test;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-/**
- * Repository class for <code>PetType</code> domain objects.
- *
- * @author Patrick Baumgartner
- */
+class OwnerTests {
 
-public interface PetTypeRepository extends JpaRepository<PetType, Integer> {
+	@Test
+	void addPetAddsPersistedPet() {
+		Owner owner = new Owner();
+		Pet pet = new Pet();
+		pet.setId(5);
+		pet.setName("Buddy");
 
-	/**
-	 * Retrieve all {@link PetType}s from the data store.
-	 * @return a Collection of {@link PetType}s.
-	 */
-	@Query("SELECT ptype FROM PetType ptype ORDER BY ptype.name")
-	List<PetType> findPetTypes();
+		owner.addPet(pet);
+
+		assertTrue(owner.getPets().contains(pet));
+		assertEquals(1, owner.getPets().size());
+	}
+
+	@Test
+	void addPetDoesNotAddDuplicatePet() {
+		Owner owner = new Owner();
+		Pet pet = new Pet();
+		pet.setId(5);
+		pet.setName("Buddy");
+
+		owner.addPet(pet);
+		owner.addPet(pet);
+
+		assertEquals(1, owner.getPets().size());
+	}
 
 }
