@@ -12,7 +12,7 @@ edit Kubernetes manifests in YAML, operate Pods using `kubectl`, etc.
 timeline
     title Lab Session Objectives
     1. Kubernetes Overview
-        : Identity system components
+        : Identify system components
     2. Develop Pods
         : Create a Pod with kubectl-run (imperative)
         : Create a Pod with kubectl-apply (declarative)
@@ -220,7 +220,7 @@ use?
 
   
 
-Can you find this java pod using the `kubectl get` command with a label
+Can you find this Java pod using the `kubectl get` command with a label
 selector? You have defined some labels in the previous exercise. See
 more information about labels and selectors at
 https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
