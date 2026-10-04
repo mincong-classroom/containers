@@ -204,9 +204,10 @@ Apply the manifest, and prove that the Pod is running:
 In this exercise, you are going to use `kubectl exec` to connect to the
 container and inspect it.
 
-Connect to the pod and then use `ps aux` to describe the running Java
-process inside the Java pod. Provide the process ID (PID) and the path
-of the JAR inside the container.
+Connect to the pod with an interactive shell, using `kubectl exec -it`,
+and then use `ps aux` to describe the running Java process inside the
+Java pod. Provide the process ID (PID) and the path of the JAR inside
+the container.
 
   
 
@@ -264,8 +265,8 @@ running at the end.
   
 
 ``` sh
-# TODO: enter commands and analysis; new Pod manifest should be stored under
-#   ${REPO}/k8s/lab-2/pod-team-info-server.yaml
+# NOTE: write the fixed manifest to file "${REPO_ROOT}/k8s/lab-2/pod-team-info-server.yaml"
+# TODO: enter the commands and the analysis here
 ```
 
 ``` sh
