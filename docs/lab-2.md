@@ -1,6 +1,6 @@
 # Pods in Kubernetes
 
-Lab Session 2 - 21 Oct, 2025
+Lab Session 2 - 23 Oct, 2026
 
 ## Introduction
 
