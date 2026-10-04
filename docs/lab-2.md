@@ -54,10 +54,8 @@ kubectl config current-context
 kubectl get nodes
 ```
 
-The current context must be `docker-desktop`. Otherwise, `kubectl` talks
-to another cluster: switch to it with
-`kubectl config use-context docker-desktop`. The list of nodes must show
-one node, with the status `Ready`.
+The current context must be `docker-desktop`, and the list of nodes must
+show one node, with the status `Ready`.
 
   
 
