@@ -260,7 +260,9 @@ kubectl apply -f https://mincong.io/esigelec/lab/2/broken-pod.yaml
 ```
 
 Is the Pod running? Please troubleshoot and make sure that the Pod is
-running at the end.
+running at the end. Keep the image of the Pod,
+`mincongclassroom/team-info-server`: you can change its tag and the
+configuration of the Pod, but don’t replace it with another image.
 
 Keep your fix in your Git repository: first, download the manifest into
 `${REPO_ROOT}/k8s/lab-2/pod-team-info-server.yaml`, from the root
