@@ -10,7 +10,6 @@ edit Kubernetes manifests in YAML, operate Pods using `kubectl`, etc.
 
 ``` mermaid
 timeline
-    title Lab Session Objectives
     1. Kubernetes Overview
         : Identify system components
     2. Develop Pods

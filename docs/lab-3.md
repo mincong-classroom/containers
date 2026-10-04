@@ -13,7 +13,6 @@ architecture.
 
 ``` mermaid
 timeline
-    title Lab Session Objectives
     1. Deployment Basics
         : Create a new ReplicaSet
         : Create a new Deployment
