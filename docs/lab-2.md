@@ -175,16 +175,26 @@ Prove that the pod is running:
 Write a Kubernetes manifest (YAML file) to create a pod for the Java
 Docker image that your team published in the previous lab session:
 `mincongclassroom/spring-petclinic-${team}:1.1.0`, the version with your
-team name in the footer (Lab Session 1, Exercise 6). This pod should
-also be called a “spring-petclinic”, running on the container port 8080,
-having labels `app=spring-petclinic` and `team=${team}`. Persist the
-manifest in your Git repository under the path
-`${git_repo}/k8s/lab-2/pod-petclinic.yaml`.
+team name in the footer (Lab Session 1, Exercise 6). This Pod should
+also be named `spring-petclinic`. It runs on the container port 8080,
+and has the labels `app=spring-petclinic` and `team=${team}`. Persist
+the manifest in your Git repository under the path
+`${REPO_ROOT}/k8s/lab-2/pod-petclinic.yaml`.
 
   
 
 ``` sh
-# NOTE: write the answer to file "${REPO}/k8s/lab-2/pod-petclinic.yaml"
+# NOTE: write the manifest to file "${REPO_ROOT}/k8s/lab-2/pod-petclinic.yaml"
+```
+
+  
+
+Apply the manifest, and prove that the Pod is running:
+
+  
+
+``` sh
+# TODO: enter the commands and results here
 ```
 
   
