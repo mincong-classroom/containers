@@ -67,8 +67,10 @@ Create a Java Archive (JAR) file using the source code of
 [spring-projects/spring-petclinic](https://github.com/spring-projects/spring-petclinic).
 To facilitate the lab session, the source code has been embedded into
 your repository under `apps/spring-petclinic`. You can build it using
-Maven (`mvn`). Start the server using the `java` command line. What do
-you see if you visit the URL <http://localhost:8080> in your browser?
+Maven (`mvn`). The recommended JDK is 25, the latest long-term support
+(LTS) version; any LTS from 17 (17 or 21) works too. Start the server
+using the `java` command line. What do you see if you visit the URL
+<http://localhost:8080> in your browser?
 
   
 
@@ -95,13 +97,14 @@ Define a Dockerfile, which is the first step of creating a Docker image.
 Create a Dockerfile based on one of the JDK images available on Docker
 Hub <https://hub.docker.com/_/eclipse-temurin>. You must pick a
 long-term support (LTS) version 17+ (17, 21 or 25), the minimum that
-Spring PetClinic requires. Ideally, you’ll be able to find a small image
-to reduce the container size. The Java Archive (JAR) file should be
-built outside of Docker via the command you used in the previous
-question. Expose port 8080 of the container so that it can accept
-requests from the clients. The Dockerfile should be stored under the
-following directory: `${REPO_ROOT}/apps/spring-petclinic/Dockerfile`.
-Please commit the changes and push them to GitHub.
+Spring PetClinic requires; 25 is the recommended one. Ideally, you’ll be
+able to find a small image to reduce the container size. The Java
+Archive (JAR) file should be built outside of Docker via the command you
+used in the previous question. Expose port 8080 of the container so that
+it can accept requests from the clients. The Dockerfile should be stored
+under the following directory:
+`${REPO_ROOT}/apps/spring-petclinic/Dockerfile`. Please commit the
+changes and push them to GitHub.
 
   
 
