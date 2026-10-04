@@ -262,6 +262,23 @@ kubectl apply -f https://mincong.io/esigelec/lab/2/broken-pod.yaml
 Is the Pod running? Please troubleshoot and make sure that the Pod is
 running at the end.
 
+Keep your fix in your Git repository: first, download the manifest into
+`${REPO_ROOT}/k8s/lab-2/pod-team-info-server.yaml`, from the root
+directory of the repository.
+
+``` sh
+# macOS, Linux
+curl -o k8s/lab-2/pod-team-info-server.yaml https://mincong.io/esigelec/lab/2/broken-pod.yaml
+```
+
+``` powershell
+# Windows (PowerShell)
+Invoke-WebRequest -Uri https://mincong.io/esigelec/lab/2/broken-pod.yaml -OutFile k8s/lab-2/pod-team-info-server.yaml
+```
+
+In PowerShell, use the second command: there, `curl` can be another name
+of `Invoke-WebRequest`, which has other options.
+
   
 
 ``` sh
