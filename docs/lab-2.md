@@ -36,7 +36,7 @@ the next course.
 
 ## Exercise 1 - Kubernetes Overview
 
-Observe the default containers started by Kubernetes using the command
+Observe the default Pods started by Kubernetes using the command
 `kubectl get pods --all-namespaces`. Then, try to identify them in the
 cluster architecture diagram below. You don’t have to write down the
 mappings between the diagram and the output of the `kubectl` command,
@@ -54,8 +54,8 @@ https://kubernetes.io/docs/concepts/architecture/](assets/kubernetes-cluster-arc
   
 
 In the diagram above, there are 2 worker nodes and one control-plane
-node (master node). How many nodes do you have on your machine? What is
-the name of the node?
+node. How many nodes do you have on your machine? What is the name of
+the node?
 
   
 
@@ -84,6 +84,10 @@ the container using the `kubectl port-forward pod/nginx 8080:80`, so
 that you can access the content via the host port 8080. Then, open your
 browser, visit <http://localhost:8080>, copy the content of the web page
 and paste it below.
+
+The command keeps running while the connection is open: leave it
+running. Run the next commands in another terminal. Press Ctrl+C to stop
+it.
 
   
 
