@@ -281,28 +281,16 @@ https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
 Create a Pod using the following command:
 
 ``` sh
-kubectl apply -f https://mincong.io/esigelec/lab/2/broken-pod.yaml
+cd $REPO_ROOT
+kubectl apply -f k8s/lab-2/pod-team-info-server.yaml
 ```
 
-Is the Pod running? Please troubleshoot and make sure that the Pod is
-running at the end.
-
-Keep your fix in your Git repository: first, download the manifest into
-`${REPO_ROOT}/k8s/lab-2/pod-team-info-server.yaml`, from the root
-directory of the repository.
-
-``` sh
-# macOS, Linux
-curl -o k8s/lab-2/pod-team-info-server.yaml https://mincong.io/esigelec/lab/2/broken-pod.yaml
-```
-
-``` powershell
-# Windows (PowerShell)
-Invoke-WebRequest -Uri https://mincong.io/esigelec/lab/2/broken-pod.yaml -OutFile k8s/lab-2/pod-team-info-server.yaml
-```
-
-In PowerShell, use the second command: there, `curl` can be another name
-of `Invoke-WebRequest`, which has other options.
+This Pod aims to provide information related to your team. It clarifies
+what are the expectations for the assignments for your lab sessions,
+especially in regards to the container registry (Docker Hub). Is the Pod
+running? Please troubleshoot and make sure that the Pod is running at
+the end. For the Kubernetes changes, you should edit the file
+`k8s/lab-2/pod-team-info-server.yaml` directly.
 
   
 
