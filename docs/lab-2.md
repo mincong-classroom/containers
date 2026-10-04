@@ -30,9 +30,36 @@ To submit the answers to this lab session, please fill in your answers
 in this document in place. This should be done before the beginning of
 the next course.
 
-> [!NOTE]
-> You need to enable the Kubernetes feature in Docker Desktop.
-> See the README of the Git repository for more details.
+## Before you start - Create the Kubernetes cluster
+
+This lab session is the first one that uses Kubernetes: Docker Desktop
+runs a Kubernetes cluster on your machine. Create it first.
+
+1.  In Docker Desktop, open the **Kubernetes** view, and select **Create
+    cluster**.
+2.  Choose the cluster type **kind**, with one node and the default
+    version. If kind is not offered, choose **Kubeadm**. Both work for
+    this lab session: only some names differ, such as the name of the
+    node. One node is enough, and each node takes more memory.
+3.  Select **Create**, and wait until the cluster is running.
+
+If the Kubernetes view already shows a running cluster, keep it, and go
+to the check below. On Linux, Docker Desktop doesn’t install `kubectl`:
+install it first, see <https://kubernetes.io/docs/tasks/tools/>.
+
+Check the cluster in a terminal:
+
+``` sh
+kubectl config current-context
+kubectl get nodes
+```
+
+The current context must be `docker-desktop`. Otherwise, `kubectl` talks
+to another cluster: switch to it with
+`kubectl config use-context docker-desktop`. The list of nodes must show
+one node, with the status `Ready`.
+
+  
 
 ## Exercise 1 - Kubernetes Overview
 
