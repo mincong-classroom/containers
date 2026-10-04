@@ -67,9 +67,8 @@ the node?
 
 ## Exercise 2 - Create a nginx Pod (kubectl-run)
 
-Create a pod using the `kubectl run` command with the `nginx` Docker
-image, you should name the pod “nginx” and publish the container’s port
-80 to the Kubernetes cluster.
+Create a Pod named “nginx” with the `kubectl run` command, using the
+`nginx` Docker image, and declare the container port 80.
 
   
 
