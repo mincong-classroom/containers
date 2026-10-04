@@ -143,17 +143,19 @@ Delete this pod using the `kubectl delete` command
 Instead of using the `kubectl run` command, now you need to write a
 manifest to describe the specification of the pod in a YAML file. Copy
 the official example here:
-<https://kubernetes.io/docs/concepts/workloads/pods/#using-pods>. Add
-label `team=${team}` to the definition, where `team` is the value of
+<https://kubernetes.io/docs/concepts/workloads/pods/#using-pods>, and
+use the image `nginx`, the latest version, instead of `nginx:1.14.2`.
+Add label `team=${team}` to the definition, where `team` is the value of
 your team in lower case. Persist the YAML file in your Git repository
-under the path `${git_repo}/k8s/lab-2/pod-nginx.yaml`.
+under the path `${REPO_ROOT}/k8s/lab-2/pod-nginx.yaml`.
 
 Describe the full `kubectl apply` command used:
 
   
 
 ``` sh
-# NOTE: write the answer to file "${REPO}/k8s/lab-2/pod-nginx.yaml"
+# NOTE: write the manifest to file "${REPO_ROOT}/k8s/lab-2/pod-nginx.yaml"
+# TODO: enter the kubectl apply command here
 ```
 
   
