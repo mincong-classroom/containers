@@ -62,24 +62,26 @@ docker --version
 
 ### Kubernetes
 
-Kubernetes has many distributions. For this course, we use the Kubernetes feature embedded in Docker Desktop. To enable this, you need to go to the Docker Desktop's settings and click "Enable Kubernetes". Note that this feature is only useful for lab sessions 3, 4, and 5 when practicing Kubernetes-related skills. It does not need to be enabled for lab sessions 1 and 2.
+Kubernetes has many distributions. For this course, we use the Kubernetes cluster that Docker Desktop runs on your machine. It is needed from lab session 2 on: lab session 1 doesn't use it.
 
-![Enable Kubernetes](docs/assets/Screenshot-2024-07-03-docker-desktop.png)
+Lab session 2 starts by creating the cluster: see "Before you start" in [`docs/lab-2.md`](docs/lab-2.md). In short, in Docker Desktop, open the **Kubernetes** view, select **Create cluster**, choose the cluster type **kind** with one node, or **Kubeadm** if kind is not offered, and select **Create**.
 
 You can verify if the command line tool `kubectl` is available in your terminal and verify its version using the following commands:
 
 ```sh
 type kubectl
-#kubectl is /Users/minconghuang/.docker/bin/kubectl
+#kubectl is /usr/local/bin/kubectl
 
 kubectl version
-#Client Version: v1.29.2
-#Kustomize Version: v5.0.4-0.20230601165947-6ce0bf390ce3
-#Server Version: v1.29.2
+#Client Version: v1.36.1
+#Kustomize Version: v5.8.1
+#Server Version: v1.36.1
 ```
 
+On Windows, replace `type kubectl` with `Get-Command kubectl` in PowerShell, or `where kubectl` in the Command Prompt. On Linux, Docker Desktop doesn't install `kubectl`: install it first, see <https://kubernetes.io/docs/tasks/tools/>. Your versions may differ: the server version is the one of your cluster.
+
 > [!TIP]
-> Use the button "Reset Kubernetes Cluster" of Docker Desktop to clear all existing objects of the cluster. This can be useful if you want to start from scratch, especially when you use a desktop from the school or when you messed up the cluster with incorrect operations. It only takes a few seconds to complete.
+> Use the button **Reset cluster**, in the Kubernetes settings of Docker Desktop, to clear all existing objects of the cluster. This can be useful if you want to start from scratch, especially when you use a desktop from the school or when you messed up the cluster with incorrect operations.
 
 > [!TIP]
 > To facilitate your operations, you can enable the shell completion for your OS. Visit the official guide [kubectl completion | Kubernetes](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_completion/) for the detailed instructions. You can also add an alias `k` for `kubectl` so that you don't have to type the entire command.

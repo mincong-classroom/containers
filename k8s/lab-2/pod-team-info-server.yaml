@@ -1,1 +1,20 @@
-# TODO(lab-2): implement your logic here
+# TODO(lab-2): make this Pod run, see Exercise 6 of docs/lab-2.md
+apiVersion: v1
+kind: Pod
+metadata:
+  name: team-info-server
+  labels:
+    app: team-info-server
+spec:
+  containers:
+  - name: main
+    image: mincongclassroom/team-info-server:123
+    ports:
+    - containerPort: 8090
+    resources:
+      limits:
+        memory: "64Mi"
+        cpu: "250m"
+      requests:
+        memory: "32Mi"
+        cpu: "100m"

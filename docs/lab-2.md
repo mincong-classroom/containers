@@ -1,6 +1,6 @@
 # Pods in Kubernetes
 
-Lab Session 2 - 21 Oct, 2025
+Lab Session 2 - 23 Oct, 2026
 
 ## Introduction
 
@@ -10,9 +10,8 @@ edit Kubernetes manifests in YAML, operate Pods using `kubectl`, etc.
 
 ``` mermaid
 timeline
-    title Lab Session Objectives
     1. Kubernetes Overview
-        : Identity system components
+        : Identify system components
     2. Develop Pods
         : Create a Pod with kubectl-run (imperative)
         : Create a Pod with kubectl-apply (declarative)
@@ -26,17 +25,43 @@ timeline
         : Read information available on a container registry
 ```
 
-To submit the answers to this lab session, please fill in your answers
-in this document in place. This should be done before the beginning of
-the next course.
+Write your answers in this document, where you see `# TODO`. A `# NOTE`
+points to another file of your repository, such as a Kubernetes
+manifest: write it there. Commit and push to the branch `main`: only
+`main` counts. Never force-push.
 
-> [!NOTE]
-> You need to enable the Kubernetes feature in Docker Desktop.
-> See the README of the Git repository for more details.
+## Before you start - Create the Kubernetes cluster
+
+This lab session is the first one that uses Kubernetes: Docker Desktop
+runs a Kubernetes cluster on your machine. Create it first.
+
+1.  In Docker Desktop, open the **Kubernetes** view, and select **Create
+    cluster**.
+2.  Choose the cluster type **kind**, with one node and the default
+    version. If kind is not offered, choose **Kubeadm**. Both work for
+    this lab session: only some names differ, such as the name of the
+    node. One node is enough, and each node takes more memory.
+3.  Select **Create**, and wait until the cluster is running.
+
+If the Kubernetes view already shows a running cluster, keep it, and go
+to the check below. On Linux, Docker Desktop doesn’t install `kubectl`:
+install it first, see <https://kubernetes.io/docs/tasks/tools/>.
+
+Check the cluster in a terminal:
+
+``` sh
+kubectl config current-context
+kubectl get nodes
+```
+
+The current context must be `docker-desktop`, and the list of nodes must
+show one node, with the status `Ready`.
+
+  
 
 ## Exercise 1 - Kubernetes Overview
 
-Observe the default containers started by Kubernetes using the command
+Observe the default Pods started by Kubernetes using the command
 `kubectl get pods --all-namespaces`. Then, try to identify them in the
 cluster architecture diagram below. You don’t have to write down the
 mappings between the diagram and the output of the `kubectl` command,
@@ -54,8 +79,8 @@ https://kubernetes.io/docs/concepts/architecture/](assets/kubernetes-cluster-arc
   
 
 In the diagram above, there are 2 worker nodes and one control-plane
-node (master node). How many nodes do you have on your machine? What is
-the name of the node?
+node. How many nodes do you have on your machine? What is the name of
+the node?
 
   
 
@@ -67,9 +92,8 @@ the name of the node?
 
 ## Exercise 2 - Create a nginx Pod (kubectl-run)
 
-Create a pod using the `kubectl run` command with the `nginx` Docker
-image, you should name the pod “nginx” and publish the container’s port
-80 to the Kubernetes cluster.
+Create a Pod named “nginx” with the `kubectl run` command, using the
+`nginx` Docker image, and declare the container port 80.
 
   
 
@@ -84,6 +108,10 @@ the container using the `kubectl port-forward pod/nginx 8080:80`, so
 that you can access the content via the host port 8080. Then, open your
 browser, visit <http://localhost:8080>, copy the content of the web page
 and paste it below.
+
+The command keeps running while the connection is open: leave it
+running. Run the next commands in another terminal. Press Ctrl+C to stop
+it.
 
   
 
@@ -140,17 +168,19 @@ Delete this pod using the `kubectl delete` command
 Instead of using the `kubectl run` command, now you need to write a
 manifest to describe the specification of the pod in a YAML file. Copy
 the official example here:
-<https://kubernetes.io/docs/concepts/workloads/pods/#using-pods>. Add
-label `team=${team}` to the definition, where `team` is the value of
+<https://kubernetes.io/docs/concepts/workloads/pods/#using-pods>, and
+use the image `nginx`, the latest version, instead of `nginx:1.14.2`.
+Add label `team=${team}` to the definition, where `team` is the value of
 your team in lower case. Persist the YAML file in your Git repository
-under the path `${git_repo}/k8s/lab-2/pod-nginx.yaml`.
+under the path `${REPO_ROOT}/k8s/lab-2/pod-nginx.yaml`.
 
 Describe the full `kubectl apply` command used:
 
   
 
 ``` sh
-# NOTE: write the answer to file "${REPO}/k8s/lab-2/pod-nginx.yaml"
+# NOTE: write the manifest to file "${REPO_ROOT}/k8s/lab-2/pod-nginx.yaml"
+# TODO: enter the kubectl apply command here
 ```
 
   
@@ -168,16 +198,28 @@ Prove that the pod is running:
 ## Exercise 4 - Create a Java Pod
 
 Write a Kubernetes manifest (YAML file) to create a pod for the Java
-Docker image “spring-petclinic” made in the previous lab session. This
-pod should also be called a “spring-petclinic”, running on the container
-port 8080, having labels `app=spring-petclinic` and `team=${team}`.
-Persist the manifest in your Git repository under the path
-`${git_repo}/k8s/lab-2/pod-petclinic.yaml`.
+Docker image that your team published in the previous lab session:
+`mincongclassroom/spring-petclinic-${team}:1.1.0`, the version with your
+team name in the footer (Lab Session 1, Exercise 6). This Pod should
+also be named `spring-petclinic`. It runs on the container port 8080,
+and has the labels `app=spring-petclinic` and `team=${team}`. Persist
+the manifest in your Git repository under the path
+`${REPO_ROOT}/k8s/lab-2/pod-petclinic.yaml`.
 
   
 
 ``` sh
-# NOTE: write the answer to file "${REPO}/k8s/lab-2/pod-petclinic.yaml"
+# NOTE: write the manifest to file "${REPO_ROOT}/k8s/lab-2/pod-petclinic.yaml"
+```
+
+  
+
+Apply the manifest, and prove that the Pod is running:
+
+  
+
+``` sh
+# TODO: enter the commands and results here
 ```
 
   
@@ -187,9 +229,10 @@ Persist the manifest in your Git repository under the path
 In this exercise, you are going to use `kubectl exec` to connect to the
 container and inspect it.
 
-Connect to the pod and then use `ps aux` to describe the running Java
-process inside the Java pod. Provide the process ID (PID) and the path
-of the JAR inside the container.
+Connect to the pod with an interactive shell, using `kubectl exec -it`,
+and then use `ps aux` to describe the running Java process inside the
+Java pod. Provide the process ID (PID) and the path of the JAR inside
+the container.
 
   
 
@@ -220,7 +263,7 @@ use?
 
   
 
-Can you find this java pod using the `kubectl get` command with a label
+Can you find this Java pod using the `kubectl get` command with a label
 selector? You have defined some labels in the previous exercise. See
 more information about labels and selectors at
 https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
@@ -238,17 +281,22 @@ https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
 Create a Pod using the following command:
 
 ``` sh
-kubectl apply -f https://mincong.io/esigelec/lab/2/broken-pod.yaml
+cd $REPO_ROOT
+kubectl apply -f k8s/lab-2/pod-team-info-server.yaml
 ```
 
-Is the Pod running? Please troubleshoot and make sure that the Pod is
-running at the end.
+This Pod aims to provide information related to your team. It clarifies
+what are the expectations for the assignments for your lab sessions,
+especially in regards to the container registry (Docker Hub). Is the Pod
+running? Please troubleshoot and make sure that the Pod is running at
+the end. For the Kubernetes changes, you should edit the file
+`k8s/lab-2/pod-team-info-server.yaml` directly.
 
   
 
 ``` sh
-# TODO: enter commands and analysis; new Pod manifest should be stored under
-#   ${REPO}/k8s/lab-2/pod-team-info-server.yaml
+# NOTE: write the fixed manifest to file "${REPO_ROOT}/k8s/lab-2/pod-team-info-server.yaml"
+# TODO: enter the commands and the analysis here
 ```
 
 ``` sh
