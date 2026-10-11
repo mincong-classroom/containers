@@ -1,6 +1,6 @@
 # Kubernetes Networking
 
-Lab Session 4 - 29 Oct, 2025
+Lab Session 4 - 29 Oct, 2026
 
 ## Introduction
 
@@ -87,8 +87,10 @@ is to practice your networking skills in Kubernetes — in particular
 cross-namespace Service resolution via DNS — and your understanding of
 inter-service communication.
 
-Hint: if the About page cannot load the information, use the logs to
-trace the request. The API Gateway runs with verbose (DEBUG) logging —
-read its logs with `kubectl logs` to see whether your request is
-received and which backend route it matches, and read the Team Info
-Server’s logs to check whether the request reached it.
+Hint: if the About page cannot load the information, read the HTTP
+status and the response that it shows, then use the logs to trace the
+request. In the manifest, the verbose (DEBUG) logging of the API Gateway
+is in comments, the variables `LOGGING_LEVEL_*`: enable it, then read
+its logs with `kubectl logs` to see whether your request is received and
+which backend route it matches, and read the Team Info Server’s logs to
+check whether the request reached it.

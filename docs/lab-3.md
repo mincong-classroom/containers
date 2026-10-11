@@ -1,6 +1,6 @@
 # Kubernetes Deployment
 
-Lab Session 3 - 28 Oct, 2025
+Lab Session 3 - 28 Oct, 2026
 
 ## Introduction
 
@@ -165,7 +165,7 @@ kubectl apply -f https://mincong.io/esigelec/lab/3/microservices.yaml
 
 Create a new Docker image for the API Gateway and the PetClinic UI. This
 is a replacement of the default image
-`springcommunity/spring-petclinic-api-gateway`. The new UI should
+`mincongclassroom/spring-petclinic-api-gateway`. The new UI should
 include your clinic name (your team color) in the footer of the Spring
 PetClinic UI, such as “Pet Clinic: Red” or “Pet Clinic: Green”. Publish
 your result to Docker Hub. The target repository is:
@@ -185,7 +185,7 @@ when they are ready.
 
 Create a new Docker image for the Customer Service. This is a
 replacement of the default image
-`springcommunity/spring-petclinic-customers-service`. You need to add a
+`mincongclassroom/spring-petclinic-customers-service`. You need to add a
 new customer in the initialization script of the database. Publish your
 result to Docker Hub. The target repository is:
 
@@ -204,7 +204,7 @@ when they are ready.
 
 Create a new Docker image for the Veterinarian Service. This is a
 replacement of the default image
-`springcommunity/spring-petclinic-vets-service`. You need to add a new
+`mincongclassroom/spring-petclinic-vets-service`. You need to add a new
 veterinarian in the initialization script of the database. Publish your
 result to Docker Hub. The target repository is:
 
