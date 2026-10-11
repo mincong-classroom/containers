@@ -1,0 +1,65 @@
+spring:
+  main:
+    web-application-type: reactive
+  application:
+    name: genai-service
+  profiles:
+    active: production
+  config:
+    import: optional:classpath:/creds.yaml
+  ai:
+    chat:
+      client:
+        enabled: true
+    # These apply when using spring-ai-starter-model-azure-openai
+    azure:
+      openai:
+        api-key: ${AZURE_OPENAI_KEY}
+        endpoint: ${AZURE_OPENAI_ENDPOINT}
+        chat:
+          options:
+            temperature: 0.7
+            deployment-name: gpt-4o
+    # These apply when using spring-ai-starter-model-openai
+    openai:
+      api-key: ${OPENAI_API_KEY:demo}
+      chat:
+        options:
+            temperature: 0.7
+            model: gpt-4o-mini
+
+
+logging:
+  level:
+    org:
+      springframework:
+        ai:
+          chat:
+            client:
+              advisor: DEBUG
+---
+# The Config Server, except in Kubernetes
+spring:
+  config:
+    activate:
+      on-profile: "!kubernetes"
+    import: optional:configserver:${CONFIG_SERVER_URL:http://localhost:8888/}
+
+---
+spring:
+  config:
+    activate:
+      on-profile: docker
+    import: configserver:http://config-server:8888
+
+---
+# Kubernetes: the configuration comes from a ConfigMap, mounted as a file, as it comes from the
+# Config Server elsewhere.
+spring:
+  config:
+    activate:
+      on-profile: kubernetes
+    import: file:/config/application.yml
+  cloud:
+    config:
+      enabled: false

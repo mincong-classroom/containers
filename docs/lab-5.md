@@ -1,6 +1,6 @@
 # Configuration
 
-Lab Session 5 - 30 Oct, 2025
+Lab Session 5 - 30 Oct, 2026
 
 ## Introduction
 
@@ -66,7 +66,7 @@ Hints:
 - A new version of the Pet Clinic Micoservices stack is available under
   <https://mincong.io/esigelec/lab/5/microservices.yaml>
 - The configuration of the API Gateway is defined under the ConfigMap
-  “api-gateway-config” of this manifest.
+  “petclinic-config” of this manifest.
 - You can verify whether the API key is referenced by the GenAI service
   by printing the value of the environment variable via a `kubectl exec`
   command.

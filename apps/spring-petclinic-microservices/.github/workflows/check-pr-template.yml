@@ -1,0 +1,282 @@
+name: Triage pull requests
+
+on:
+  pull_request_target:
+    types: [opened, reopened, edited]
+  schedule:
+    - cron: '0 8 * * *'   # every day at 08:00 UTC
+
+permissions:
+  pull-requests: write
+  issues: write
+
+jobs:
+  # ── 1. On every PR open/edit ─────────────────────────────────────────────────
+  #   a) Detect non-project practice/test submissions → close immediately
+  #   b) Otherwise, check that the PR template was filled in
+  # Running both checks in the same job ensures they are sequential and never
+  # post two independent comments on the same PR.
+  triage-pr:
+    if: github.event_name == 'pull_request_target'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ensure required labels exist
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const labels = [
+              { name: 'invalid',            color: 'e11d48', description: 'This does not seem right' },
+              { name: 'needs-information',  color: 'e4e669', description: 'More information is needed before this can be reviewed' },
+            ];
+            for (const label of labels) {
+              try {
+                await github.rest.issues.createLabel({ owner: context.repo.owner, repo: context.repo.repo, ...label });
+              } catch (e) {
+                if (e.status !== 422) throw e; // 422 = already exists, ignore
+              }
+            }
+
+      - name: Check non-project PR patterns then template completeness
+        uses: actions/github-script@v7
+        env:
+          # Classic PAT with read:org scope (store as repo/org secret ORG_READ_PAT).
+          # Required to detect *private* org members — GITHUB_TOKEN only sees public ones.
+          # If the secret is absent the workflow still runs but bypasses public members only.
+          ORG_READ_PAT: ${{ secrets.ORG_READ_PAT }}
+        with:
+          script: |
+            const { data: pr } = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.payload.pull_request.number,
+            });
+
+            // ── ORG MEMBER BYPASS ────────────────────────────────────────────────────────
+            // GITHUB_TOKEN authenticates as github-actions[bot], which is not an org member.
+            // The checkMembershipForUser endpoint therefore returns 302 for everyone when
+            // using GITHUB_TOKEN — it cannot distinguish members from non-members.
+            //
+            // Solution: use ORG_READ_PAT (a classic PAT with read:org scope stored as a
+            // repo/org secret) only for this call, by overriding the Authorization header
+            // on a single request through the existing `github` client. All write
+            // operations below still use the default GITHUB_TOKEN so automated comments
+            // appear as github-actions[bot].
+            //
+            // Note: `require('@actions/github')` is NOT available here — github-script's
+            // bundled runtime has no on-disk node_modules for user scripts to resolve
+            // against, so requiring it throws "Cannot find module '@actions/github'".
+            //
+            // Fallback: if ORG_READ_PAT is not configured, the GITHUB_TOKEN is used and
+            // only *public* org members are bypassed (302 is treated as non-member).
+            const orgReadToken = process.env.ORG_READ_PAT;
+
+            try {
+              const { status } = await github.request('GET /orgs/{org}/members/{username}', {
+                org: context.repo.owner,
+                username: pr.user.login,
+                headers: orgReadToken ? { authorization: `token ${orgReadToken}` } : undefined,
+              });
+              if (status === 204) {
+                console.log(`@${pr.user.login} is a ${context.repo.owner} org member — skipping triage.`);
+                return;
+              }
+            } catch (e) {
+              if (e.status !== 404 && e.status !== 302) throw e;
+              // 404 = confirmed non-member; 302 = token lacks org read → treat as non-member
+            }
+
+            // ── PART A: detect non-project practice / test submissions ────────────────
+            // Only scan title and branch — the PR template body contains the word
+            // "bootcamp" itself and would cause false positives if included.
+            const title  = pr.title || '';
+            const branch = pr.head.ref || '';
+            const combined = `${title} ${branch}`.toLowerCase();
+
+            const nonProjectPatterns = [
+              /\bspc-\d+/i,                                                     // SPC-001, SPC-003-T1 …
+              /add\s+(jenkins|gitlab|github\s+actions)\s+(ci|pipeline)/i,
+              /add\s+ci\s+(workflow|pipeline)/i,
+              /push\s+(image|docker)\s+to\s+(ecr|dockerhub|registry)/i,
+              /add\s+(kubernetes|k8s)\s+manifests?/i,
+              /add\s+monitoring\s+(stack|dashboard)/i,
+              /\bdevops\s+(project|assignment|lab|homework|tp)\b/i,
+              /\b(lab|tp|homework|assignment|exercise)\s*[#\d]/i,
+              /\bbootcamp\b/i,
+            ];
+
+            const matched = nonProjectPatterns.find((pattern) => pattern.test(combined));
+
+            if (matched) {
+              console.log(`Non-project pattern matched: ${matched} — closing PR #${pr.number}.`);
+
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: pr.number,
+                labels: ['invalid'],
+              });
+
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: pr.number,
+                body: [
+                  `## 👋 Hi @${pr.user.login},`,
+                  '',
+                  'It looks like this Pull Request may be a **practice, test, or course-related submission** rather than a contribution intended for the upstream project.',
+                  '',
+                  'This repository is widely used for learning and experimentation, but PRs opened only to practice on the sample are **out of scope** for the upstream project and will be closed.',
+                  '',
+                  'If you are testing ideas or learning on this sample, please keep those changes in **your own fork**.',
+                  '',
+                  `Please read our [CONTRIBUTING guide](https://github.com/${context.repo.owner}/${context.repo.repo}/blob/${context.payload.repository.default_branch}/CONTRIBUTING.md) for details on what kinds of contributions we accept.`,
+                  '',
+                  '_This is an automated message. If you believe this was a mistake, please re-open and leave a comment explaining why your PR is intended for the upstream project._',
+                ].join('\n'),
+              });
+
+              await github.rest.pulls.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: pr.number,
+                state: 'closed',
+              });
+
+              // Stop here — no need to check the template on a non-project PR.
+              return;
+            }
+
+            console.log(`No non-project pattern detected on PR #${pr.number} — checking template completeness.`);
+
+            // ── PART B: check that the PR template was properly filled in ────────────
+            const body = pr.body || '';
+
+            function isIncomplete(text) {
+              if (text.trim().length < 30) return true;
+              // Template HTML comment still present → body was never edited
+              if (text.includes('<!-- Please describe your change')) return true;
+              // Placeholder issue reference was not replaced
+              if (/Fixes\s*#\s*\(issue\)/.test(text)) return true;
+              // All checklist items still unchecked
+              const unchecked = (text.match(/- \[ \]/g) || []).length;
+              const checked   = (text.match(/- \[x\]/gi) || []).length;
+              if (unchecked >= 3 && checked === 0) return true;
+              return false;
+            }
+
+            const currentLabels  = pr.labels.map(l => l.name);
+            const alreadyFlagged = currentLabels.includes('needs-information');
+
+            if (isIncomplete(body)) {
+              if (!alreadyFlagged) {
+                await github.rest.issues.addLabels({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: pr.number,
+                  labels: ['needs-information'],
+                });
+
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: pr.number,
+                  body: [
+                    `## 📋 Please complete the PR template, @${pr.user.login}`,
+                    '',
+                    'It looks like the Pull Request description is **empty or hasn\'t been filled in** yet.',
+                    '',
+                    'To help maintainers review your contribution, please:',
+                    '',
+                    '1. Edit this PR and fill in the description template:',
+                    '   - Describe **what** your change does and **why**',
+                    '   - Link the related issue (e.g. `Fixes #123`)',
+                    '   - Tick the checklist items that apply',
+                    '',
+                    '2. Once the template is complete, the `needs-information` label will be removed automatically.',
+                    '',
+                    '> **Note:** If this PR is not updated within **7 days**, it will be closed automatically. You are welcome to re-open it once the description is complete.',
+                    '',
+                    '_This is an automated message._',
+                  ].join('\n'),
+                });
+
+                console.log(`PR #${pr.number} flagged as needs-information.`);
+              } else {
+                console.log(`PR #${pr.number} still incomplete, already flagged.`);
+              }
+            } else {
+              if (alreadyFlagged) {
+                await github.rest.issues.removeLabel({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: pr.number,
+                  name: 'needs-information',
+                });
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: pr.number,
+                  body: `Thanks for completing the PR template, @${pr.user.login}! The \`needs-information\` label has been removed. A maintainer will review your PR shortly. 🙏`,
+                });
+                console.log(`PR #${pr.number} template now complete, label removed.`);
+              } else {
+                console.log(`PR #${pr.number} template looks complete.`);
+              }
+            }
+
+  # ── 2. Daily: close PRs still labelled needs-information after 7 days ────────
+  close-stale-incomplete:
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Close PRs with incomplete template after 7 days of inactivity
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+
+            const prs = await github.paginate(github.rest.pulls.list, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              per_page: 100,
+            });
+
+            for (const pr of prs) {
+              const hasLabel = pr.labels.some(l => l.name === 'needs-information');
+              if (!hasLabel) continue;
+
+              const lastUpdate = new Date(pr.updated_at);
+              if (lastUpdate >= sevenDaysAgo) {
+                console.log(`PR #${pr.number} flagged but still recent (${pr.updated_at}), skipping.`);
+                continue;
+              }
+
+              console.log(`Closing PR #${pr.number} — no activity for 7+ days with incomplete template.`);
+
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: pr.number,
+                body: [
+                  '## PR closed — template not completed',
+                  '',
+                  `Hi @${pr.user.login},`,
+                  '',
+                  'This Pull Request has been **automatically closed** because the description template was not completed within 7 days.',
+                  '',
+                  'You are welcome to **re-open it** once the template is fully filled in. A complete description helps maintainers understand the context and intent of your change.',
+                  '',
+                  `See our [CONTRIBUTING guide](https://github.com/${context.repo.owner}/${context.repo.repo}/blob/main/CONTRIBUTING.md) for details.`,
+                  '',
+                  '_This is an automated message._',
+                ].join('\n'),
+              });
+
+              await github.rest.pulls.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: pr.number,
+                state: 'closed',
+              });
+            }

@@ -1,0 +1,74 @@
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      server:
+        webflux:
+          default-filters:
+            - name: CircuitBreaker
+              args:
+                name: defaultCircuitBreaker
+                fallbackUri: forward:/fallback
+            - name: Retry
+              args:
+                retries: 1
+                statuses: SERVICE_UNAVAILABLE
+                methods: POST
+          routes:
+            - id: vets-service
+              uri: lb://vets-service
+              predicates:
+                - Path=/api/vet/**
+              filters:
+                - StripPrefix=2
+            - id: visits-service
+              uri: lb://visits-service
+              predicates:
+                - Path=/api/visit/**
+              filters:
+                - StripPrefix=2
+            - id: customers-service
+              uri: lb://customers-service
+              predicates:
+                - Path=/api/customer/**
+              filters:
+                - StripPrefix=2
+            - id: genai-service
+              uri: lb://genai-service
+              predicates:
+                - Path=/api/genai/**
+              filters:
+                - StripPrefix=2
+                - CircuitBreaker=name=genaiCircuitBreaker,fallbackUri=/fallback
+  reactor:
+    context-propagation: auto
+---
+# The Config Server, except in Kubernetes
+spring:
+  config:
+    activate:
+      on-profile: "!kubernetes"
+    import: optional:configserver:${CONFIG_SERVER_URL:http://localhost:8888/}
+
+---
+spring:
+  config:
+    activate:
+      on-profile: docker
+    import: configserver:http://config-server:8888
+
+---
+# Kubernetes: the configuration comes from a ConfigMap, mounted as a file, as it comes from the
+# Config Server elsewhere.
+spring:
+  config:
+    activate:
+      on-profile: kubernetes
+    import: file:/config/application.yml
+  cloud:
+    config:
+      enabled: false
+  # Not "auto" as above: with it, the gateway logs two warnings for each request
+  reactor:
+    context-propagation: limited
