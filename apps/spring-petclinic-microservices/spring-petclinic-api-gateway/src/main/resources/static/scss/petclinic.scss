@@ -1,0 +1,335 @@
+/*
+ * Copyright 2016 the original author or authors.
+ *
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+ @import "bootstrap";
+
+$icon-font-path:    "../../webjars/bootstrap/fonts/";
+
+$spring-green:      #6db33f;
+$spring-dark-green: #5fa134;
+$spring-brown:      #34302D;
+$spring-grey:       #838789;
+$spring-light-grey: #f1f1f1;
+
+$chatbox-bg-color: #f1f1f1;
+$chatbox-header-bg-color: #075E54;
+$chatbox-header-text-color: white;
+$chatbox-height: 400px;
+$chatbox-border-radius: 10px;
+$chatbox-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+$chatbox-bubble-user-bg-color: #dcf8c6;
+$chatbox-bubble-bot-bg-color: #ffffff;
+$chatbox-bubble-border-color: #e1e1e1;
+$chatbox-footer-bg-color: #f9f9f9;
+$chatbox-input-border-color: #ccc;
+$chatbox-button-bg-color: #075E54;
+$chatbox-button-hover-bg-color: #128C7E;
+
+$body-bg:                           $spring-light-grey;
+$text-color:                        $spring-brown;
+$link-color:                        $spring-dark-green;
+$link-hover-color:                  $spring-dark-green;
+
+$navbar-default-link-color:         $spring-light-grey;
+$navbar-default-link-active-color:  $spring-light-grey;
+$navbar-default-link-hover-color:   $spring-light-grey;
+$navbar-default-link-hover-bg:      $spring-green;
+$navbar-default-toggle-icon-bar-bg: $spring-light-grey;
+$navbar-default-toggle-hover-bg:    transparent;
+$navbar-default-link-active-bg:     $spring-green;
+
+$border-radius-base:             0;
+$border-radius-large:            0;
+$border-radius-small:            0;
+
+$nav-tabs-active-link-hover-color:        $spring-light-grey;
+$nav-tabs-active-link-hover-bg:           $spring-brown;
+$nav-tabs-active-link-hover-border-color: $spring-brown;
+$nav-tabs-border-color:                   $spring-brown;
+
+$pagination-active-bg:                    $spring-brown;
+$pagination-active-border:                $spring-green;
+$table-border-color:                      $spring-brown;
+
+.table > thead > tr > th {
+  background-color: lighten($spring-brown, 3%);
+  color: $spring-light-grey;
+}
+
+.table-filter {
+  background-color: $spring-brown;
+  padding: 9px 12px;
+}
+
+.nav > li > a {
+  color: $spring-grey;
+}
+
+.btn-primary {
+  margin-top: 12px;
+  border-width: 2px;
+  transition: border 0.15s;
+  color: $spring-light-grey;
+  background: $spring-brown;
+  border-color: $spring-green;
+  -webkit-transition: border 0.15s;
+  -moz-transition: border 0.15s;
+  -o-transition: border 0.15s;
+  -ms-transition: border 0.15s;
+
+  &:hover,
+  &:focus,
+  &:active,
+  &.active,
+  .open .dropdown-toggle {
+    background-color: $spring-brown;
+    border-color: $spring-brown;
+  }
+}
+
+
+.container .text-muted {
+  margin: 20px 0;
+}
+
+code {
+  font-size: 80%;
+}
+
+.xd-container {
+  margin-top: 40px;
+  margin-bottom: 100px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+h1 {
+  margin-bottom: 15px
+}
+
+.index-page--subtitle {
+  font-size: 16px;
+  line-height: 24px;
+  margin: 0 0 30px;
+}
+
+#job-params-modal .modal-dialog {
+  width: 90%;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+[ng-cloak].splash {
+  display: block !important;
+}
+[ng-cloak] {
+  display: none;
+}
+
+.splash {
+  background: $spring-green;
+  color: $spring-brown;
+  display: none;
+}
+
+.error-page {
+  margin-top: 100px;
+  text-align: center;
+}
+
+.error-page .error-title {
+  font-size: 24px;
+  line-height: 24px;
+  margin: 30px 0 0;
+}
+
+table td {
+  vertical-align: middle;
+}
+
+table td .progress {
+  margin-bottom: 0;
+}
+
+table td.action-column {
+  width: 1px;
+}
+
+.help-block {
+  color: lighten($text-color, 50%); // lighten the text some for contrast
+}
+
+.xd-containers {
+  font-size: 15px;
+}
+
+.cluster-view > table td {
+  vertical-align: top;
+}
+
+.cluster-view .label, .cluster-view .column-block {
+  display: block;
+}
+
+.cluster-view .input-group-addon {
+  width: 0%;
+}
+
+.cluster-view {
+  margin-bottom: 0;
+}
+
+.container-details-table th {
+  background-color: lighten($spring-brown, 3%);
+  color: $spring-light-grey;
+}
+
+.status-help-content-table td {
+  color: $spring-brown;
+}
+
+.logo {
+  width: 200px;
+}
+
+.myspinner {
+  animation-name: spinner;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+
+  -webkit-transform-origin: 49% 50%;
+  -webkit-animation-name: spinner;
+  -webkit-animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+}
+
+hr {
+  border-top: 1px dotted $spring-brown;
+}
+
+/* Chatbox container */
+.chatbox {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  width: 300px;
+  background-color: $chatbox-bg-color;
+  border-radius: $chatbox-border-radius;
+  box-shadow: $chatbox-box-shadow;
+  display: flex;
+  flex-direction: column;
+  
+  &.minimized {
+    .chatbox-content {
+      height: 40px; /* Height when minimized (header only) */
+    }
+    .chatbox-messages,
+    .chatbox-footer {
+      display: none;
+    }
+  }
+}
+
+/* Header styling */
+.chatbox-header {
+  background-color: $chatbox-header-bg-color;
+  color: $chatbox-header-text-color;
+  padding: 10px;
+  text-align: center;
+  border-top-left-radius: $chatbox-border-radius;
+  border-top-right-radius: $chatbox-border-radius;
+  cursor: pointer;
+}
+
+/* Chatbox content styling */
+.chatbox-content {
+  display: flex;
+  flex-direction: column;
+  height: $chatbox-height; /* Adjust to desired height */
+  overflow: hidden; /* Hide overflow to make it scrollable */
+}
+
+.chatbox-messages {
+  flex-grow: 1;
+  overflow-y: auto; /* Allows vertical scrolling */
+  padding: 10px;
+}
+
+/* Chat bubbles styling */
+.chat-bubble {
+  max-width: 80%;
+  padding: 10px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  position: relative;
+  word-wrap: break-word;
+  font-size: 14px;
+
+  strong {
+    font-weight: bold;
+  }
+  
+  em {
+    font-style: italic;
+  }
+
+  &.user {
+    background-color: $chatbox-bubble-user-bg-color; /* WhatsApp-style light green */
+    margin-left: auto;
+    text-align: right;
+    border-bottom-right-radius: 0;
+  }
+
+  &.bot {
+    background-color: $chatbox-bubble-bot-bg-color;
+    margin-right: auto;
+    text-align: left;
+    border-bottom-left-radius: 0;
+    border: 1px solid $chatbox-bubble-border-color;
+  }
+}
+
+/* Input field and button */
+.chatbox-footer {
+  padding: 10px;
+  background-color: $chatbox-footer-bg-color;
+  display: flex;
+}
+
+.chatbox-footer input {
+  flex-grow: 1;
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid $chatbox-input-border-color;
+  margin-right: 10px;
+  outline: none;
+}
+
+.chatbox-footer button {
+  background-color: $chatbox-button-bg-color;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $chatbox-button-hover-bg-color;
+  }
+}
+
+@import "typography.scss";
+@import "header.scss";
+@import "responsive.scss";
