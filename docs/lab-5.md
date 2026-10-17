@@ -13,11 +13,12 @@ learned from the previous chapters.
 
 ## Exercise 1 - Create Secret
 
-In the `dev` namespace, create a new Opaque Secret called “openai”. This
-Secret should contain one single key called “api-key”. The value of the
-API key is communicated on Microsoft Teams. Please verify that the
-secret is created. In the validation, only use a prefix of the actual
-value to prove that the resource is created.
+In the `default` namespace, where the PetClinic stack runs, create a new
+Opaque Secret called “openai”: a Pod can only read the Secrets of its
+own namespace. This Secret should contain one single key called
+“api-key”. The value of the API key is communicated on Microsoft Teams.
+Please verify that the secret is created. In the validation, only use a
+prefix of the actual value to prove that the resource is created.
 
 > [!CAUTION]
 > Don’t commit the API value to Git. Don’t commit the key
@@ -33,16 +34,17 @@ value to prove that the resource is created.
 
 ## Exercise 2 - Create Workload
 
-In the `dev` namespace, develop a solution for running the AI service in
-Kubernetes. This feature is powered by the `genai-service` from the
-Spring Community. You need to integrate this microservice into the
-existing stack (api-gateway, customer-service, vets-service, etc). To do
-this, you need to deploy this workload to Kubernetes as a Deployment.
-Also, you need to set up the networking part to enable internal
-communication between this AI service and other existing services. The
-containers should use the port 8084 to accept HTTP requests. You will
-also need to check the configuration of the API Gateway to ensure that
-it routes the related HTTP requests to the GenAI service.
+In the `default` namespace, develop a solution for running the AI
+service in Kubernetes. This feature is powered by the `genai-service`
+from the Spring Community. You need to integrate this microservice into
+the existing stack (api-gateway, customer-service, vets-service, etc).
+To do this, you need to deploy this workload to Kubernetes as a
+Deployment. Also, you need to set up the networking part to enable
+internal communication between this AI service and other existing
+services. The containers should use the port 8084 to accept HTTP
+requests. You will also need to check the configuration of the API
+Gateway to ensure that it routes the related HTTP requests to the GenAI
+service.
 
 You can find the Spring Boot application image from Docker Hub:
 [`springcommunity/spring-petclinic-genai-service`](https://hub.docker.com/r/springcommunity/spring-petclinic-genai-service)
