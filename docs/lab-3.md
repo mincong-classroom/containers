@@ -48,8 +48,10 @@ kubectl get pods
 
 ## Exercise 1 - ReplicaSet
 
-Create a new ReplicaSet with 1 replica and the Docker image
-“spring-petclinic” that you developed in Lab Session 1. Use labels
+Create a new ReplicaSet with 1 replica and the Docker image that your
+team published in Lab Session 1:
+`mincongclassroom/spring-petclinic-${team}:1.1.0`, the version with your
+team name in the footer (Lab Session 1, Exercise 6). Use labels
 `app=spring-petclinic` and `team=${team}` for both the ReplicaSet and
 the underlying Pods. The underlying container should use port 8080 to
 receive incoming traffic. The container name should be `main` in the
@@ -101,12 +103,12 @@ Now, delete the ReplicaSet to free up space on your machine.
 ## Exercise 2 - Deployment
 
 Similar to Exercise 1, create a new Deployment with 1 replica using the
-Docker image “spring-petclinic”. Use labels `app=spring-petclinic` and
-`team=${team}` for both the Deployment and the underlying Pods. The
-underlying container should use port 8080 to receive incoming traffic.
-The container name should be `main` in the Deployment. Persist the
-Kubernetes manifest (YAML file) in the Git repository as file
-`k8s/lab-3/deployment-petclinic.yaml`.
+same Docker image, `mincongclassroom/spring-petclinic-${team}:1.1.0`.
+Use labels `app=spring-petclinic` and `team=${team}` for both the
+Deployment and the underlying Pods. The underlying container should use
+port 8080 to receive incoming traffic. The container name should be
+`main` in the Deployment. Persist the Kubernetes manifest (YAML file) in
+the Git repository as file `k8s/lab-3/deployment-petclinic.yaml`.
 
   
 
