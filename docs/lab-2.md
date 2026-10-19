@@ -27,8 +27,8 @@ timeline
 
 Write your answers in this document, where you see `# TODO`. A `# NOTE`
 points to another file of your repository, such as a Kubernetes
-manifest: write it there. Commit and push to the branch `main`: only
-`main` counts. Never force-push.
+manifest: write it there, not in this document. Commit and push to the
+branch `main`: only `main` counts. Never force-push.
 
 ## Before you start - Create the Kubernetes cluster
 
