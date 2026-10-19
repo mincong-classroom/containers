@@ -30,6 +30,11 @@ timeline
         : Memory
 ```
 
+Write your answers in this document, where you see `# TODO`. A `# NOTE`
+points to another file of your repository, such as a Kubernetes
+manifest: write it there, not in this document. Commit and push to the
+branch `main`: only `main` counts. Never force-push.
+
 This lab session starts from the stack of Lab Session 4. Copy your
 manifest of Lab 4 to the path of the answer of this lab, and apply it:
 

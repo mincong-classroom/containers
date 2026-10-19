@@ -5,17 +5,24 @@ Lab Session 4 - 29 Oct, 2026
 ## Introduction
 
 The goal of this lab session is to let you practice the networking
-basics in Kubernetes and apply them in real-world scenarios, i.e. in
-multiple environments and in cross-team collaboration.
+basics in Kubernetes and apply them in real-world scenarios with
+multiple namespaces and multiple services.
 
-To submit the answers to this lab session, please fill in your answers
-in this document in place. This should be done before the beginning of
-the next course.
+Write your answers in this document, where you see `# TODO`. A `# NOTE`
+points to another file of your repository, such as a Kubernetes
+manifest: write it there, not in this document. Commit and push to the
+branch `main`: only `main` counts. Never force-push.
 
 ## Exercise 1 - Create Namespace
 
 Create a new namespace called `classroom`. Then, list all the existing
 namespaces in the Kubernetes cluster.
+
+  
+
+``` sh
+# TODO: write down your commands and the list of namespaces here
+```
 
 ## Exercise 2 - Deploy Team Info Server
 
@@ -57,6 +64,13 @@ Here are some additional information:
 - Command
   [`kubectl config set-context`](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_config/kubectl_config_set-context/)
 
+  
+
+``` sh
+# NOTE: write the manifest to file "${REPO_ROOT}/k8s/lab-4/app-team-info.yaml"
+# TODO: write down your commands, the HTTP responses and your analysis of the URLs here
+```
+
 ## Exercise 3 - PetClinic Integration
 
 The Spring PetClinic web application already ships with an “About” page:
@@ -94,3 +108,9 @@ is in comments, the variables `LOGGING_LEVEL_*`: enable it, then read
 its logs with `kubectl logs` to see whether your request is received and
 which backend route it matches, and read the Team Info Server’s logs to
 check whether the request reached it.
+
+  
+
+``` sh
+# NOTE: write the updated manifest to file "${REPO_ROOT}/k8s/lab-4/microservices.yaml"
+```

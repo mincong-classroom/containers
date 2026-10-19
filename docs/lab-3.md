@@ -32,6 +32,11 @@ timeline
         : Troubleshoot with traces and metrics
 ```
 
+Write your answers in this document, where you see `# TODO`. A `# NOTE`
+points to another file of your repository, such as a Kubernetes
+manifest: write it there, not in this document. Commit and push to the
+branch `main`: only `main` counts. Never force-push.
+
 ## Before you start - Delete the Pods of Lab 2
 
 The Pods of Lab Session 2 may still run in your cluster: `nginx`,

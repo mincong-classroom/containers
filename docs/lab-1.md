@@ -38,9 +38,10 @@ PetClinic is a sample application designed to show how the Spring stack
 can be used to build simple, but powerful database-oriented
 applications.
 
-To submit the answers to this lab session, please fill in your answers
-directly in this document. This must be done before the beginning of the
-next course.
+Write your answers in this document, where you see `# TODO`. A `# NOTE`
+points to another file of your repository, such as the `Dockerfile`:
+write it there, not in this document. Commit and push to the branch
+`main`: only `main` counts. Never force-push.
 
 ## Exercise 1: Create a JAR
 
@@ -66,10 +67,16 @@ graph LR
 Create a Java Archive (JAR) file using the source code of
 [spring-projects/spring-petclinic](https://github.com/spring-projects/spring-petclinic).
 To facilitate the lab session, the source code has been embedded into
-your repository under `apps/spring-petclinic`. You can build it using
-Maven (`mvn`). The recommended JDK is 25, the latest long-term support
-(LTS) version; any LTS from 17 (17 or 21) works too. Start the server
-using the `java` command line. What do you see if you visit the URL
+your repository under `apps/spring-petclinic`. You can build it with the
+Maven wrapper of the project, which downloads Maven for you:
+
+- `./mvnw` on macOS and Linux, and in Git Bash on Windows
+- `.\mvnw.cmd` in PowerShell and in the Command Prompt (`cmd`) on
+  Windows
+
+The recommended JDK is 25, the latest long-term support (LTS) version;
+any LTS from 17 (17 or 21) works too. Start the server using the `java`
+command line. What do you see if you visit the URL
 <http://localhost:8080> in your browser?
 
   

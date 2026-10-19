@@ -100,7 +100,7 @@ On Windows, replace `type kubectl` with `Get-Command kubectl` in PowerShell, or 
 
 ### Others
 
-You are also expected to have these command line tools: `mvn`, `javac`, `git`, `curl`
+You are also expected to have these command line tools: `javac`, `git`, `curl`. You don't need to install Maven: the Java projects of this repository build with their Maven wrapper (`./mvnw`, or `.\mvnw.cmd` on Windows), which downloads Maven for you.
 
 ## Discussions
 
