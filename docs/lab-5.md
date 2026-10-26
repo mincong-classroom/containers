@@ -203,7 +203,7 @@ Zipkin. The source code of the service,
 is another way to find an answer, or to confirm what you see.
 
 The traces need the Tracing Server, and their export enabled in your
-ConfigMap, as in Lab 3, Exercise 5. If your stack no longer has them,
+ConfigMap, as in Lab 3, Exercise 6. If your stack no longer has them,
 apply `observability.yaml` again, set `enabled: true` under `tracing`
 and `export` in the ConfigMap of your manifest, apply it, and restart
 the five services. Then open Zipkin, at <http://localhost:9411>:
@@ -221,7 +221,7 @@ kubectl port-forward deployment/tracing-server 9411:9411
 
 Ask the chat “Which vets are radiologists?”. In Zipkin, find the trace
 of this question: add the criterion `tagQuery`, with
-`http.url=/api/genai/chatclient`, as in Lab 3, Exercise 5. Which steps
+`http.url=/api/genai/chatclient`, as in Lab 3, Exercise 6. Which steps
 does the question go through, and which one calls OpenAI? Which model
 answers, with which temperature? How many tokens does the question cost?
 

@@ -18,7 +18,7 @@ timeline
         : Update an existing Deployment
         : Manual scaling
     2. Deployment Characteristics
-        : Understand self-healing
+        : Replace a deleted Pod
         : Understand rollout history
         : Understand rollout safety
         : Understand rollout strategy
@@ -30,6 +30,8 @@ timeline
     4. Observability
         : Follow a request in the traces
         : Troubleshoot with traces and metrics
+    5. Autoscaling
+        : Scale a service with its load
 ```
 
 Write your answers in this document, where you see `# TODO`. A `# NOTE`
@@ -60,10 +62,9 @@ team name in the footer (Lab Session 1, Exercise 6). Use labels
 `app=spring-petclinic` and `team=${team}` for both the ReplicaSet and
 the underlying Pods. The underlying container should use port 8080 to
 receive incoming traffic. The container name should be `main` in the
-ReplicaSet. Please don’t use the local image; instead, you should use
-the Docker Image published to Docker Hub. Persist the Kubernetes
-manifest (YAML file) in the Git repository as file
-`k8s/lab-3/replicaset-petclinic.yaml`.
+ReplicaSet. You must use the Docker image that you published to Docker
+Hub. Persist the Kubernetes manifest (YAML file) in the Git repository
+as file `k8s/lab-3/replicaset-petclinic.yaml`.
 
   
 
@@ -127,9 +128,8 @@ Update the Deployment to include your team name as an environment
 variable. The key should be `TEAM`, and the value should be your team
 name in lowercase.
 
-Once the change is applied, describe it in a few words, as you do for a
-commit in Git. The description goes to the annotation
-`kubernetes.io/change-cause` of the Deployment:
+Once the change is applied, describe it in a few words. The description
+goes to the annotation `kubernetes.io/change-cause` of the Deployment:
 
 ``` sh
 kubectl annotate deployment/spring-petclinic kubernetes.io/change-cause="Add the environment variable TEAM"
@@ -151,9 +151,9 @@ it have, and what does it say about each of them?
   
 
 Try to disrupt the Deployment by using a Docker image tag that does not
-exist, then describe this change as well, with the same annotation. What
-happens? Consider checking the ReplicaSets related to this Deployment.
-Can you access the website from your browser?
+exist, then record the change cause using `kubectl annotate`. What
+happens to the Deployment? Consider checking the ReplicaSets related to
+this Deployment. Can you access the website from your browser?
 
   
 
@@ -189,12 +189,8 @@ strategy:
     maxUnavailable: 100%
 ```
 
-Both values are a percentage of the replicas. `maxSurge` is the number
-of Pods that a rollout can add to them, and `maxUnavailable` is the
-number of Pods that can be unavailable during a rollout. Here, a rollout
-cannot add any Pod, and all the Pods can be unavailable. See more
-information about the strategy at
-https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy
+What do these entries mean? How do they influence the deployment
+strategy?
 
 Then, disrupt the Deployment again by using a Docker image tag that does
 not exist, and describe this change afterward, as in Exercise 2. What
@@ -219,10 +215,8 @@ the requests to three services: the Customers Service, the Visits
 Service and the Veterinarians Service. Each of them runs as its own
 Deployment.
 
-Keep the Deployment `spring-petclinic` of Exercise 3 running: at the end
-of this exercise, you compare the two architectures. Stop its
-port-forward, though, if it still runs: the API Gateway takes the same
-local port.
+Keep the Deployment `spring-petclinic` of Exercise 3 running: you
+compare the two architectures in Exercise 5.
 
 The teacher prepared the manifest of the whole stack. Apply it:
 
@@ -257,75 +251,38 @@ Us!”: they show an error until Lab Sessions 4 and 5.
 Before you look for the mistake, follow a request through the stack.
 Each service writes an **access log**: one line for each HTTP request
 that it receives, in the logs of its container. Each of these lines
-contains the word `AccessLog`: to see them only, filter the logs of a
-Deployment, and follow them with `-f` while you click in the website.
-Stop with `Ctrl+C`. For example, for the API Gateway:
+contains the word `AccessLog`. Based on the access log of each service,
+can you determine which service is broken? Please fix it.
 
-``` sh
-# Linux, macOS, Git Bash
-kubectl logs deployment/api-gateway -f | grep AccessLog
-# PowerShell
-kubectl logs deployment/api-gateway -f | Select-String AccessLog
-```
-
-Replace `api-gateway` with the name of another Deployment to read its
-access log. Open the page “Find owners”, then find the line of this
-request in the access log of the API Gateway, and in the access log of
-the service that answered it. What differs between the two lines, and
-why? Then do the same for the page “Veterinarians”: what do you find,
-and what is missing?
-
-  
-
-``` sh
-# TODO: write down your commands, the lines that you found and your analysis here
-```
-
-  
-
-Now, look further into the Deployment of the Veterinarians Service, its
-Pod and its image: what went wrong?
-
-  
-
-``` sh
-# TODO: write down your commands and your analysis here
-```
-
-  
-
-Fix the mistake: save the teacher’s manifest in the Git repository as
-file `k8s/lab-3/microservices.yaml`, correct it there and apply it. Then
-go through the whole flow again: open the page “Veterinarians”, and
-follow its request in the access logs of the API Gateway and of the
-Veterinarians Service. Prove that the veterinarians are returned now.
+To save your answer, store the teacher’s manifest in the Git repository
+as file `k8s/lab-3/microservices.yaml`, put your changes there and apply
+it. Then go through the whole flow again, and prove that the website is
+working well.
 
   
 
 ``` sh
 # NOTE: write the fixed manifest to file "${REPO_ROOT}/k8s/lab-3/microservices.yaml"
-# TODO: write down your commands and your verification here
+# TODO: write down your commands, your analysis and your verification here
 ```
 
   
 
+## Exercise 5 - Monolith vs Microservices
+
 Now that the whole website works, compare the two architectures of the
-Pet Clinic: the monolith of Exercises 2 and 3, which is the Deployment
-`spring-petclinic`, and the microservices. First, install the
-observability tools of the Pet Clinic. One of them is the Metrics
+Pet Clinic: the monolith and the microservices. Before doing so, install
+the observability tools of the Pet Clinic. One of them is the Metrics
 Server, an add-on of Kubernetes that measures the CPU and the memory
-that each Pod uses; the three others are for Exercise 5. Together, they
+that each Pod uses; the three others are for Exercise 6. Together, they
 take about 500 MB of memory: if your machine runs short of it, tell the
-teacher. Wait a minute for the first measures, then read them:
+teacher.
 
 ``` sh
 kubectl apply -f https://mincong.io/esigelec/lab/3/observability.yaml
-kubectl top pod
 ```
 
-The Pods `tracing-server`, `prometheus-server` and `grafana-server` are
-the tools of Exercise 5: they belong to neither architecture, so leave
-them out of the comparison.
+Wait a minute for the first measures.
 
 Then explore the two architectures, and gather the facts that tell them
 apart, with how you found each of them. For example: the resources and
@@ -338,50 +295,25 @@ access logs, and the commands `kubectl get`, `kubectl describe`,
   
 
 ``` sh
-# TODO: write down the facts that you gathered, and how you found each of them
+# TODO: write down the facts that you gathered, and your analysis
 ```
 
   
 
-Finally, put yourself in the shoes of a software architect. Your company
-has hundreds of developers, and its main product is one application,
-built and rolled out as a whole, like the monolith of the Pet Clinic.
-Some teams ask to split it into microservices. Is it worth it?
-
-Write one or two paragraphs to defend your position, with the facts that
-you gathered. There is no standard answer: what counts is the number of
-points of view that you consider, and how far you think each of them
-through. For example: who owns a service, and who is called when it
-fails? How does a team roll out a new version? What can be scaled, and
-at what cost? What happens to the users when one part fails? And what is
-the price to pay, for the machines and for the people?
-
-  
-
-``` sh
-# TODO: write down your position here, in one or two paragraphs
-```
-
-  
-
-## Exercise 5 - Microservices Observability
+## Exercise 6 - Microservices Observability
 
 The access logs say what each service received, one service at a time.
 **Observability** tools say more: a **trace** follows one request
 through all the services, with the time of each step, and the
 **metrics** measure the services over time, such as their number of
 requests per second. This exercise uses three of these tools, which run
-since you applied `observability.yaml` in Exercise 4:
+since you applied `observability.yaml` in Exercise 5:
 
-- The **Tracing Server**, [Zipkin](https://zipkin.io/), collects the
-  traces that the services send.
+- [Zipkin](https://zipkin.io/) collects the traces that the services
+  send.
 - [Prometheus](https://prometheus.io/) collects the metrics of the
   services, every 15 seconds.
 - [Grafana](https://grafana.com/) draws these metrics in dashboards.
-
-If your machine runs short of memory, delete the monolith, which
-Exercise 4 no longer needs:
-`kubectl delete deployment/spring-petclinic`.
 
 The services do not send their traces yet. In your manifest
 `k8s/lab-3/microservices.yaml`, enable them: in the ConfigMap
@@ -393,13 +325,10 @@ the four PetClinic services, so that they read their new configuration:
 kubectl rollout restart deployment/api-gateway deployment/customers-service deployment/visits-service deployment/vets-service
 ```
 
-Why does a change of the ConfigMap need a restart of the Deployments?
-
   
 
 ``` sh
 # NOTE: write the change to file "${REPO_ROOT}/k8s/lab-3/microservices.yaml"
-# TODO: write down your commands and your answer here
 ```
 
   
@@ -416,7 +345,7 @@ replaced its Pod. Then, in Zipkin, find the trace of each of them: add
 the criterion `serviceName` with the “+” of the search bar, choose the
 service that answered the page, click “Run Query”, then “Show”. For each
 trace: which services took part in the request, how long did it take,
-and where did the time go?
+and where was the time spent?
 
   
 
@@ -426,19 +355,19 @@ and where did the time go?
 
   
 
-Now, use these tools to troubleshoot, as Exercise 4 did with the access
-logs. Stop the Veterinarians Service, then open the page “Veterinarians”
-again:
+Now, create a service outage artificially by stopping the Veterinarians
+Service:
 
 ``` sh
 kubectl scale deployment/vets-service --replicas=0
 ```
 
-Find the trace of this request in Zipkin: add the criterion `tagQuery`,
-with `http.url=/api/vet/vets`. What does it tell you? Then open
-Prometheus, at <http://localhost:9090>, then the menu “Status”, then
-“Target health”: which services does Prometheus monitor, and what is the
-state of each of them?
+Then, open the page “Veterinarians” again. Find the trace of this
+request in Zipkin: add the criterion `tagQuery`, with
+`http.url=/api/vet/vets`. What does it tell you? Then open Prometheus,
+at <http://localhost:9090>, then the menu “Status”, then “Target
+health”: which services does Prometheus monitor, and what is the state
+of each of them?
 
 ``` sh
 kubectl port-forward deployment/prometheus-server 9090:9090
@@ -470,4 +399,28 @@ kubectl port-forward deployment/grafana-server 3000:3000
 
 ``` sh
 # TODO: write down your observations here
+```
+
+  
+
+## Exercise 7 - Autoscaling
+
+So far, you changed the number of replicas by hand using
+`kubectl scale`. But did you know that Kubernetes can also change it for
+you, depending on the load? This is the job of a
+**HorizontalPodAutoscaler** (HPA).
+
+Create an HPA that runs the Customers Service with a minimum of 1
+replica and a maximum of 3 replicas, depending on its CPU. Then send
+many requests to this service: does it scale up? Stop them: does it
+scale down? No tool is needed to send them: the console of your browser
+can do it. Follow the number of Pods of each service in the dashboard of
+Grafana, and find in Zipkin which Pod answered a request. How does the
+HPA decide the number of replicas?
+
+  
+
+``` sh
+# NOTE: write the HPA to file "${REPO_ROOT}/k8s/lab-3/horizontalpodautoscaler-customers-service.yaml"
+# TODO: write down your commands, your observations, your analysis and what you learned here
 ```
