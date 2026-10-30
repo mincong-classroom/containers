@@ -2,6 +2,7 @@ package org.springframework.samples.petclinic.genai;
 
 import org.springframework.ai.vectorstore.SimpleVectorStore;
 import org.springframework.ai.vectorstore.VectorStore;
+import org.springframework.ai.vectorstore.qdrant.QdrantVectorStore;
 import tools.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,14 +49,21 @@ public class VectorStoreController {
 
 	@EventListener
 	public void loadVetDataToVectorStoreOnStartup(ApplicationStartedEvent event) throws IOException {
+		// Qdrant keeps its own data, which is loaded outside of the service, such as from a
+		// snapshot: the service loads nothing into it
+		if (this.vectorStore instanceof QdrantVectorStore) {
+			logger.info("vector store in Qdrant: nothing to load at startup");
+			return;
+		}
+
 		Resource resource = new ClassPathResource("vectorstore.json");
 
 		// Check if file exists
-		if (resource.exists()) {
+		if (this.vectorStore instanceof SimpleVectorStore simpleVectorStore && resource.exists()) {
 			// In order to save on AI credits, use a pre-embedded database that was saved
 			// to
 			// disk based on the current data in the h2 data.sql file
-			((SimpleVectorStore) this.vectorStore).load(resource);
+			simpleVectorStore.load(resource);
 			logger.info("vector store loaded from existing vectorstore.json file in the classpath");
 			return;
 		}
