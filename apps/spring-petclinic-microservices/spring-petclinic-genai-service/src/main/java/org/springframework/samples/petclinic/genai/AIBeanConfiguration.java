@@ -3,6 +3,7 @@ package org.springframework.samples.petclinic.genai;
 import org.springframework.ai.embedding.EmbeddingModel;
 import org.springframework.ai.vectorstore.SimpleVectorStore;
 import org.springframework.ai.vectorstore.VectorStore;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +17,10 @@ import org.springframework.web.reactive.function.client.WebClient;
 @Configuration
 public class AIBeanConfiguration {
 
+	// The vector store in memory, the default. Another value of spring.ai.vectorstore.type, such
+	// as "qdrant", lets Spring AI auto-configure that implementation instead.
 	@Bean
+	@ConditionalOnProperty(name = "spring.ai.vectorstore.type", havingValue = "simple")
 	VectorStore vectorStore(EmbeddingModel embeddingModel) {
 		return SimpleVectorStore.builder(embeddingModel).build();
 	}

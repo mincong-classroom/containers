@@ -27,6 +27,24 @@ spring:
         options:
             temperature: 0.7
             model: gpt-4o-mini
+    vectorstore:
+      # The implementation of the vector store:
+      # - "simple": in the memory of the service, loaded from vectorstore.json at startup
+      # - "qdrant": a Qdrant server, at spring.ai.vectorstore.qdrant.host and port (6334, gRPC),
+      #   whose collection vector_store already holds the vets: the service neither creates it
+      #   nor loads it
+      type: simple
+  cloud:
+    gateway:
+      server:
+        webflux:
+          filter:
+            # The client of Qdrant brings gRPC, with which the gateway creates its filter
+            # JsonToGrpc. That filter needs the class io.grpc.netty.NettyChannelBuilder, which the
+            # client doesn't have (it has the shaded Netty of gRPC), and the service would fail
+            # to start. This service routes no gRPC.
+            json-to-grpc:
+              enabled: false
 
 
 logging:
